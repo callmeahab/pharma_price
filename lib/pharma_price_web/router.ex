@@ -21,6 +21,7 @@ defmodule PharmaPriceWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+    live "/map", PageLive.Map, :index
   end
 
   # Other scopes may use custom stacks.
