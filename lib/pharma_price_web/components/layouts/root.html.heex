@@ -79,15 +79,6 @@
                 <%= @current_user.email %>
               </.link>
             </li>
-            <li>
-              <.link
-                href={~p"/users/log_out"}
-                method="delete"
-                class="w-12 flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-105"
-              >
-                Log out
-              </.link>
-            </li>
           <% else %>
             <li>
               <.link
@@ -217,45 +208,6 @@
               PHARMA PRICE
             </a>
 
-            <ul class="relative mr-8 z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
-              <%= if @current_user do %>
-                <li>
-                  <.link
-                    href={~p"/users/settings"}
-                    class="w-10 flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-110"
-                  >
-                    <%= @current_user.email %>
-                  </.link>
-                </li>
-                <li>
-                  <.link
-                    href={~p"/users/log_out"}
-                    method="delete"
-                    class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-110"
-                  >
-                    Log out
-                  </.link>
-                </li>
-              <% else %>
-                <li>
-                  <.link
-                    href={~p"/users/register"}
-                    class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-110"
-                  >
-                    Register
-                  </.link>
-                </li>
-                <li>
-                  <.link
-                    href={~p"/users/log_in"}
-                    class="flex w-10 text-[0.8125rem] text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-110"
-                  >
-                    Log in
-                  </.link>
-                </li>
-              <% end %>
-            </ul>
-
             <button
               class="w-[30px] h-[30px] flex items-center justify-center text-gray-700 absolute right-[25px] focus:outline-none hover:text-pink-600 hover:scale-110 transition ease-in-out duration-200"
               aria-label="close"
@@ -321,6 +273,36 @@
                     >
                       Terms &amp; Conditions
                     </a>
+
+                    <%= if @current_user do %>
+                      <.link
+                        href={~p"/users/settings"}
+                        class="menu-item relative text-gray-900 pl-[30px] pr-4 mb-8 transition duration-300 ease-in-out last:mb-0 hover:text-gray-900"
+                      >
+                        User Settings
+                      </.link>
+
+                      <.link
+                        href={~p"/users/log_out"}
+                        method="delete"
+                        class="menu-item relative text-gray-900 pl-[30px] pr-4 mb-8 transition duration-300 ease-in-out last:mb-0 hover:text-gray-900"
+                      >
+                        Log out
+                      </.link>
+                    <% else %>
+                      <.link
+                        href={~p"/users/register"}
+                        class="menu-item relative text-gray-900 pl-[30px] pr-4 mb-8 transition duration-300 ease-in-out last:mb-0 hover:text-gray-900 active"
+                      >
+                        Register
+                      </.link>
+                      <.link
+                        href={~p"/users/log_in"}
+                        class="menu-item relative text-gray-900 pl-[30px] pr-4 mb-8 transition duration-300 ease-in-out last:mb-0 hover:text-gray-900"
+                      >
+                        Log in
+                      </.link>
+                    <% end %>
                   </div>
                 </div>
               </div>
