@@ -35,3 +35,5 @@ pharma_price-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Ignore node_modules for scraper
+scraper/node_modules
