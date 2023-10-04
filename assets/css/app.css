@@ -2,8 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
-
 .menuIcon {
     width: 26px;
     height: auto;
@@ -40,13 +38,44 @@
     width: 13px;
 }
 
-.shadow-footer {
-    --tw-shadow: 3px 0 6px rgba(0, 0, 0, 0.12)
+.shadow-cart {
+    --tw-shadow:0 3px 6px rgba(0, 0, 0, 0.12)
 }
 
-.shadow-footer,
+.shadow-cart, .shadow-upside {
+    box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.shadow-cart:hover {
+    --tw-shadow:0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.shadow-upside {
+    --tw-shadow:0 9px 7px -8px rgba(0, 0, 0, 0.6)
+}
+
+.shadow-floatingUp {
+    --tw-shadow:0 5px 10px rgba(0, 0, 0, 0.16)
+}
+
+.shadow-floatingUp, .shadow-navigation {
+    box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+.shadow-navigation {
+    --tw-shadow:0 3px 6px rgba(0, 0, 0, 0.16)
+}
+
+.shadow-footer {
+    --tw-shadow:3px 0 6px rgba(0, 0, 0, 0.12)
+}
+
+.shadow-footer, .shadow-mobile {
+    box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
 .shadow-mobile {
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+    --tw-shadow:0 0px 2px rgba(0, 0, 0, 0.12)
 }
 
 .social {

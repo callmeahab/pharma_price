@@ -664,41 +664,56 @@ defmodule PharmaPriceWeb.CoreComponents do
   end
 
   def show_drawer(selector, display \\ "flex") do
-    JS.show(%JS{},
+    %JS{}
+    |> JS.show(
       to: selector,
       display: display,
       transition: {"ease-in duration-200", "-translate-x-full", "translate-x-0"},
       time: 200
     )
+    |> JS.show(
+      to: ".overlay",
+      display: "flex"
+    )
   end
 
   def hide_drawer(selector) do
-    JS.hide(%JS{},
+    %JS{}
+    |> JS.hide(
       to: selector,
       transition: {"ease-out duration-200", "translate-x-0", "-translate-x-full"},
       time: 200
     )
+    |> JS.hide(to: ".overlay")
   end
 
   def show_cart_drawer(selector, display \\ "flex") do
-    JS.show(%JS{},
+    %JS{}
+    |> JS.show(
       to: selector,
       display: display,
       transition: {"ease-in duration-200", "translate-x-full", "translate-x-full - 450px"},
       time: 200
     )
+    |> JS.show(
+      to: ".overlay",
+      display: "flex"
+    )
   end
 
   def hide_cart_drawer(selector) do
-    JS.hide(%JS{},
+    %JS{}
+    |> JS.hide(
       to: selector,
       transition: {"ease-in duration-200", "translate-x-0", "translate-x-full"},
       time: 200
     )
+    |> JS.hide(to: ".overlay")
   end
 
   def toggle_drawer(selector, display) do
-    JS.toggle(%JS{},
+    %JS{}
+    |> JS.toggle(
       to: selector,
       in: {"ease-in-out duration-200", "-translate-x-full", "translate-x-0"},
       out: {"ease-in-out duration-200", "translate-x-0", "-translate-x-full"},
