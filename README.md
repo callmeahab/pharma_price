@@ -1,5 +1,22 @@
 # PharmaPrice
 
+Setup:
+
+  * Install XCode
+  * Install homebrew: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+  * Install postgres: `brew install postgresql@16`
+  * Start postgres service: `brew services start postgresql`
+  * Install elixir: `brew install elixir`
+  * Run: `mix local.hex`
+  * Run: `mix archive.install hex phx_new`
+  * Run: `echo 'export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"' >> ~/.zshrc`
+  * Run: `createdb ${currentuser}` -- replace ${currentuser} with your user name
+  * Run: `createuser postgres`
+  * Run: `createdb postgres`
+  * Run: `psql`
+  * Run: `alter user postgres with superuser;`
+
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
