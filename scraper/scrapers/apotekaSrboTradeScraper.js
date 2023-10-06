@@ -57,7 +57,7 @@ const targetUrls = [
     // Add more target URLs as needed
 ];
 
-const csvFilePath = 'apotekaSrboTrade2.csv'; // Specify the path for the CSV file
+const csvFilePath = 'apotekaSrboTrade.csv'; // Specify the path for the CSV file
 scrapeAndSaveToCSV(targetUrls, csvFilePath).catch((error) => {
     console.error('Error:', error);
 });
