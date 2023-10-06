@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "scrape": "ts-node"
+    "scrape": "node scrapers/apotekaSrboTradeScraper.js"
   },
   "dependencies": {
     "csv-writer": "1.6.0",
