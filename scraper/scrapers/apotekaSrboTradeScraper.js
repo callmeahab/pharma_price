@@ -3,7 +3,7 @@ const { JSDOM } = jsdom;
 const fs = require('fs');
 
 async function scrapeAndSaveToCSV(targetUrls, csvFilePath) {
-    const dataToSave = [];
+    let csvString = 'Title,Price,Link,Image\n'; // Header row for CSV
 
     for (const url of targetUrls) {
         const dom = await JSDOM.fromURL(url);
@@ -27,21 +27,15 @@ async function scrapeAndSaveToCSV(targetUrls, csvFilePath) {
 
                 // Extract the link and image
                 const linkElement = itemContainer.querySelector('a');
-                const link = linkElement ? `Link: ${linkElement.href}` : '';
+                const link = linkElement ? linkElement.href : '';
                 const imgElement = itemContainer.querySelector('img');
-                const img = imgElement ? `Image: ${imgElement.src}` : '';
+                const img = imgElement ? imgElement.src : '';
 
-                dataToSave.push({ Title: title, Price: price, Link: link, Image: img });
+                // Append the data to the CSV string
+                csvString += `"${title}","${price}","${link}","${img}"\n`;
             }
         });
     }
-
-    // Create a custom CSV string with "Title:", "Price:", "Link:", and "Image:" labels
-    let csvString = '';
-
-    dataToSave.forEach((item) => {
-        csvString += `Title: ${item.Title}\nPrice: ${item.Price}\n${item.Link}\n${item.Image}\n\n`;
-    });
 
     // Write the CSV string to a file
     fs.writeFileSync(csvFilePath, csvString);
@@ -56,7 +50,7 @@ const targetUrls = [
     // Add more target URLs as needed
 ];
 
-const csvFilePath = 'output.csv'; // Specify the path for the CSV file
+const csvFilePath = '../csv/apotekaSrboTrade.csv'; // Specify the path for the CSV file
 scrapeAndSaveToCSV(targetUrls, csvFilePath).catch((error) => {
     console.error('Error:', error);
 });
