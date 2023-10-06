@@ -2,7 +2,7 @@ defmodule PharmaPriceWeb.SearchHeader do
   alias PharmaPriceWeb.SearchInput
   use PharmaPriceWeb, :html
 
-  def main(assigns) do
+  def render(assigns) do
     ~H"""
     <div class="w-full flex items-center justify-center bg-gray-f7 p-[30px] h-[480px] md:h-[580px] 2xxl:h-[650px] relative">
       <img

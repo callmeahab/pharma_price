@@ -696,7 +696,7 @@ defmodule PharmaPriceWeb.CoreComponents do
       time: 200
     )
     |> JS.show(
-      to: ".overlay",
+      to: ".overlay-right",
       display: "flex"
     )
   end
@@ -708,7 +708,7 @@ defmodule PharmaPriceWeb.CoreComponents do
       transition: {"ease-in duration-200", "translate-x-0", "translate-x-full"},
       time: 200
     )
-    |> JS.hide(to: ".overlay")
+    |> JS.hide(to: ".overlay-right")
   end
 
   def toggle_drawer(selector, display) do

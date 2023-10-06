@@ -1,10 +1,12 @@
 defmodule PharmaPriceWeb.PageLive.Index do
-  alias PharmaPriceWeb.SearchHeader
-  alias PharmaPriceWeb.ItemCard
+  alias PharmaPriceWeb.{SearchHeader, ItemCard, ItemDetails, HeroInfo}
   use PharmaPriceWeb, :live_view
 
   @impl true
   def mount(_params, _session, socket) do
+    selected_item = nil
+    cart = %{}
+
     items = [
       %{
         "id" => "1",
@@ -40,122 +42,73 @@ defmodule PharmaPriceWeb.PageLive.Index do
       }
     ]
 
-    {:ok, socket |> assign(:items, items)}
+    {:ok,
+     socket
+     |> assign(:items, items)
+     |> assign(:selected_item, selected_item)
+     |> assign(:cart, cart)}
   end
 
   @impl true
   def handle_event("inc_count", %{"id" => id}, socket) do
-    items =
-      socket.assigns.items
-      |> Enum.map(fn item ->
-        if item["id"] == id do
-          count = item |> Map.get("count")
-          %{item | "count" => count + 1}
-        else
-          item
-        end
-      end)
+    cart =
+      case Map.get(socket.assigns.cart, id) do
+        nil ->
+          socket.assigns.cart |> Map.put(id, %{"count" => 1})
 
-    {:noreply, assign(socket, :items, items)}
+        item ->
+          %{
+            socket.assigns.cart
+            | id => %{
+                item
+                | "count" => item["count"] + 1
+              }
+          }
+      end
+
+    {:noreply, assign(socket, :cart, cart)}
   end
 
   @impl true
   def handle_event("dec_count", %{"id" => id}, socket) do
-    items =
-      socket.assigns.items
-      |> Enum.map(fn item ->
-        if item["id"] == id do
-          count = item |> Map.get("count")
+    cart =
+      case Map.get(socket.assigns.cart, id) do
+        nil ->
+          socket.assigns.cart
 
-          if count > 0 do
-            %{item | "count" => count - 1}
+        item ->
+          if item["count"] > 0 do
+            %{socket.assigns.cart | id => %{item | "count" => item["count"] - 1}}
           else
-            item
+            socket.assings.cart
           end
-        else
-          item
-        end
-      end)
+      end
 
-    {:noreply, assign(socket, :items, items)}
+    {:noreply, assign(socket, :cart, cart)}
+  end
+
+  @impl true
+  def handle_event("select_item", %{"id" => id}, socket) do
+    item = socket.assigns.items |> Enum.find(fn item -> item["id"] == id end)
+    {:noreply, socket |> assign(:selected_item, item)}
+  end
+
+  @impl true
+  def handle_event("deselect_item", _value, socket) do
+    {:noreply, socket |> assign(:selected_item, nil)}
   end
 
   @impl true
   def render(assigns) do
     ~H"""
-    <SearchHeader.main />
-
-    <div class="flex w-full px-[15px] lg:px-[35px] mt-[35px] xxl:mt-[60px]">
-      <div class="flex w-full px-[20px] md:p-[30px] py-[40px] rounded border border-gray-300 bg-white">
-        <div class="feature-block-wrapper w-full grid grid-cols-1 gap-x-[30px] gap-y-[40px] md:grid-cols-2 xl:grid-cols-4 xxl:gap-[30px]">
-          <div class="feature-block flex w-full items-start flex-row feature-block">
-            <span
-              class="flex items-center justify-center w-[70px] h-[70px] rounded-full mr-[20px] bg-gray-300 flex-shrink-0 text-[24px] font-semibold"
-              style="background-color:#feeec8"
-            >
-              1
-            </span>
-            <div class="flex flex-col items-start">
-              <span class="w-full text-[18px] font-semibold text-gray-900 mt-0 mb-2">Your Order</span>
-              <p class="w-full leading-6 text-[14px]">
-                Add products to your cart, enter your details and confirm.
-              </p>
-            </div>
-          </div>
-          <div class="feature-block flex w-full items-start flex-row feature-block">
-            <span
-              class="flex items-center justify-center w-[70px] h-[70px] rounded-full mr-[20px] bg-gray-300 flex-shrink-0 text-[24px] font-semibold"
-              style="background-color:#ceeffe"
-            >
-              2
-            </span>
-            <div class="flex flex-col items-start">
-              <span class="w-full text-[18px] font-semibold text-gray-900 mt-0 mb-2">
-                Picking your order
-              </span>
-              <p class="w-full leading-6 text-[14px]">
-                Your order is being picked and now will be forwarded for packaging.
-              </p>
-            </div>
-          </div>
-          <div class="feature-block flex w-full items-start flex-row feature-block">
-            <span
-              class="flex items-center justify-center w-[70px] h-[70px] rounded-full mr-[20px] bg-gray-300 flex-shrink-0 text-[24px] font-semibold"
-              style="background-color:#d4f8c4"
-            >
-              3
-            </span>
-            <div class="flex flex-col items-start">
-              <span class="w-full text-[18px] font-semibold text-gray-900 mt-0 mb-2">
-                Packing Your Order
-              </span>
-              <p class="w-full leading-6 text-[14px]">
-                We are packing your order and will be out for delivery soon.
-              </p>
-            </div>
-          </div>
-          <div class="feature-block flex w-full items-start flex-row feature-block">
-            <span
-              class="flex items-center justify-center w-[70px] h-[70px] rounded-full mr-[20px] bg-gray-300 flex-shrink-0 text-[24px] font-semibold"
-              style="background-color:#d8dafe"
-            >
-              4
-            </span>
-            <div class="flex flex-col items-start">
-              <span class="w-full text-[18px] font-semibold text-gray-900 mt-0 mb-2">Deliver</span>
-              <p class="w-full leading-6 text-[14px]">
-                Your order has been prepared and out for delivery. It will be delivered soon.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <SearchHeader.render />
+    <HeroInfo.render />
+    <ItemDetails.render selected_item={@selected_item} cart={@cart} />
 
     <div class="w-full mt-[35px] xxl:mt-[60px] px-4 lg:px-[35px] pb-10">
       <div class="grid grid-cols-1 gap-x-3 gap-y-3 mt-9 md:grid-cols-2 md:gap-x-4 md:gap-y-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 xl:gap-y-4 xxl:grid-cols-4 large:grid-cols-5">
         <%= for item <- @items do %>
-          <ItemCard.main item={item} />
+          <ItemCard.main item={item} cart={@cart} />
         <% end %>
       </div>
     </div>

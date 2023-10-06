@@ -123,7 +123,23 @@
     right: 0;
 }
 
+.drawer-item-details {
+    right: 0;
+    display: flex;
+}
+
 .overlay {
+    background-color: rgba(0, 0, 0, .35);
+    z-index: 21;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0
+}
+
+.overlay-right {
     background-color: rgba(0, 0, 0, .35);
     z-index: 21;
     width: 100%;

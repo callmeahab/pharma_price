@@ -45,17 +45,72 @@ defmodule PharmaPriceWeb.ItemCard do
           <div class="flex items-center my-1 overflow-hidden w-full">
             <span class="text-gray-500 text-[11px] capitalize">Tablet</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3 flex-shrink-0"></span><span class="text-gray-500 text-[11px] truncate">90<!-- --> Pieces</span>
           </div>
-          <button class="text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none">
+          <button
+            class="text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none"
+            phx-click="select_item"
+            phx-value-id={@item["id"]}
+          >
             Details
           </button>
           <div class="ml-auto mt-2 w-full flex justify-end items-end">
             <div class="relative h-[35px] flex-shrink-0 rounded overflow-hidden ">
               <div style="width: 110px; height: 100%;">
                 <div class="group flex items-center justify-between h-[35px] rounded absolute top-0 right-0 bg-gray-900">
-                  <%= if @item["count"] > 0 do %>
-                    <.count_exists item={@item} />
+                  <%= if @cart[@item["id"]] && @cart[@item["id"]]["count"] > 0 do %>
+                    <button
+                      class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
+                      aria-label="button"
+                      phx-click="dec_count"
+                      phx-value-id={@item["id"]}
+                      phx-mounted={
+                        JS.show(
+                          transition: {"ease-in duration-500", "opacity-0", "opacity-100"},
+                          time: 500
+                        )
+                      }
+                    >
+                      <Heroicons.Outline.minus class="h-5 w-5" />
+                    </button>
+                    <span
+                      class="font-semibold text-[13px] text-white flex items-center justify-center h-full w-[40px] transition-colors duration-250 ease-in-out cursor-default"
+                      phx-mounted={
+                        JS.show(
+                          transition: {"ease-in duration-500", "opacity-0", "opacity-100"},
+                          time: 500
+                        )
+                      }
+                    >
+                      <%= @cart[@item["id"]]["count"] %>
+                    </span>
+                    <button
+                      class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
+                      aria-label="button"
+                      phx-click="inc_count"
+                      phx-value-id={@item["id"]}
+                      phx-mounted={
+                        JS.show(
+                          transition: {"ease-in duration-300", "opacity-0", "opacity-100"},
+                          time: 500
+                        )
+                      }
+                    >
+                      <Heroicons.Outline.plus class="h-5 w-5" />
+                    </button>
                   <% else %>
-                    <.count_not_exists item={@item} />
+                    <button
+                      class="flex rounded items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-500 hover:bg-gray-700 focus:outline-none"
+                      aria-label="button"
+                      phx-click="inc_count"
+                      phx-value-id={@item["id"]}
+                      phx-mounted={
+                        JS.show(
+                          transition: {"ease-in duration-500", "opacity-0", "opacity-100"},
+                          time: 500
+                        )
+                      }
+                    >
+                      <Heroicons.Outline.plus class="h-5 w-5" />
+                    </button>
                   <% end %>
                 </div>
               </div>
@@ -69,39 +124,13 @@ defmodule PharmaPriceWeb.ItemCard do
 
   def count_not_exists(assigns) do
     ~H"""
-    <button
-      id={"count-not-exists-#{@item["id"]}"}
-      class="flex rounded items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
-      aria-label="button"
-      phx-click="inc_count"
-      phx-value-id={@item["id"]}
-    >
-      <Heroicons.Outline.plus class="h-5 w-5" />
-    </button>
+
     """
   end
 
   def count_exists(assigns) do
     ~H"""
-    <button
-      class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
-      aria-label="button"
-      phx-click="dec_count"
-      phx-value-id={@item["id"]}
-    >
-      <Heroicons.Outline.minus class="h-5 w-5" />
-    </button>
-    <span class="font-semibold text-[13px] text-white flex items-center justify-center h-full w-[40px] transition-colors duration-250 ease-in-out cursor-default">
-      <%= Map.get(@item, "count") %>
-    </span>
-    <button
-      class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[35px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
-      aria-label="button"
-      phx-click="inc_count"
-      phx-value-id={@item["id"]}
-    >
-      <Heroicons.Outline.plus class="h-5 w-5" />
-    </button>
+
     """
   end
 end
