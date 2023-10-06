@@ -4,6 +4,7 @@ const fs = require('fs');
 
 async function scrapeAndSaveToCSV(targetUrls, csvFilePath) {
     let csvString = 'Title,Price,Link,Image\n'; // Header row for CSV
+    const scrapedTitles = new Set();
 
     for (const url of targetUrls) {
         const dom = await JSDOM.fromURL(url);
@@ -21,18 +22,24 @@ async function scrapeAndSaveToCSV(targetUrls, csvFilePath) {
                 // Extract the title
                 const title = titleElement ? titleElement.textContent.trim() : '';
 
-                // Extract the price if it exists
-                const priceElement = itemContainer.querySelector('.price');
-                const price = priceElement ? priceElement.textContent.trim() : '';
+                // Check if the title has already been scraped
+                if (!scrapedTitles.has(title)) {
+                    // Extract the price if it exists
+                    const priceElement = itemContainer.querySelector('.price');
+                    const price = priceElement ? priceElement.textContent.trim() : '';
 
-                // Extract the link and image
-                const linkElement = itemContainer.querySelector('a');
-                const link = linkElement ? linkElement.href : '';
-                const imgElement = itemContainer.querySelector('img');
-                const img = imgElement ? imgElement.src : '';
+                    // Extract the link and image
+                    const linkElement = itemContainer.querySelector('a');
+                    const link = linkElement ? linkElement.href : '';
+                    const imgElement = itemContainer.querySelector('img');
+                    const img = imgElement ? imgElement.src : '';
 
-                // Append the data to the CSV string
-                csvString += `"${title}","${price}","${link}","${img}"\n`;
+                    // Append the data to the CSV string
+                    csvString += `"${title}","${price}","${link}","${img}"\n`;
+
+                    // Add the title to the set of scraped titles
+                    scrapedTitles.add(title);
+                }
             }
         });
     }
@@ -50,7 +57,7 @@ const targetUrls = [
     // Add more target URLs as needed
 ];
 
-const csvFilePath = 'csv/apotekaSrboTrade.csv'; // Specify the path for the CSV file
+const csvFilePath = 'apotekaSrboTrade2.csv'; // Specify the path for the CSV file
 scrapeAndSaveToCSV(targetUrls, csvFilePath).catch((error) => {
     console.error('Error:', error);
 });
