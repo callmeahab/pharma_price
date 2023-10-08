@@ -142,7 +142,7 @@ defmodule PharmaPriceWeb.ItemDetails do
             </div>
           <% else %>
             <button
-              class="flex items-center justify-center flex-shrink-0 font-normal text-sm uppercase rounded outline-none transition duration-250 ease-in-out focus:outline-none text-white bg-gray-900 hover:bg-gray-700 h-11 px-[30px] w-full big"
+              class="flex items-center justify-center flex-shrink-0 font-normal text-sm uppercase rounded outline-none transition duration-250 ease-in-out focus:outline-none text-white bg-gray-900 hover:bg-gray-700 h-12 px-[30px] w-full big"
               type="button"
               aria-label="button"
               phx-click="inc_count"
