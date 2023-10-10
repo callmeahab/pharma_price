@@ -39,3 +39,4 @@ npm-debug.log
 scraper/node_modules
 
 .idea
+/.idea/
