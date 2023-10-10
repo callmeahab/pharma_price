@@ -75,6 +75,7 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
     #     %{name: name, price: price, url: response.request_url}
     #   ]
     # }
+
     %Crawly.ParsedItem{
       :items => items,
       :requests => []
