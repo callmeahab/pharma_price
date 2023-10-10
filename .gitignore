@@ -39,3 +39,5 @@ npm-debug.log
 scraper/node_modules
 
 .idea
+
+dets_simple_storage
