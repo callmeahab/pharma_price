@@ -2,7 +2,7 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
   alias PharmaPrice.Spiders.ScrapeItem
   use Crawly.Spider
 
-  @csv_file_path "/tmp/output.csv"
+  @csv_file_path "srbo_trade_output.csv"
 
   @impl Crawly.Spider
   def base_url do
@@ -82,20 +82,6 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
       :items => items,
       :requests => []
     }
-  end
-
-  defp append_items_to_csv(items) do
-    # Open the CSV file in append mode
-    {:ok, file} = File.open(@csv_file_path, [:append])
-
-    # Iterate through items and write them to the CSV file
-    Enum.each(items, fn item ->
-      csv_line = "#{item.title},#{item.price},#{item.link},#{item.image}\n"
-      File.write(file, csv_line)
-    end)
-
-    # Close the CSV file
-    File.close(file)
   end
 
   def build_absolute_url(url, request_url) do
