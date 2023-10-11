@@ -9,3 +9,10 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+PharmaPrice.Repo.insert!(%PharmaPrice.Vendors.Vendor{
+  name: "Srbotrade Apoteka",
+  description: "Srbotrade Apoteka",
+  logo: "/images/srbotrade-header-logo.jpeg",
+  logo_type: "image/jpeg"
+})

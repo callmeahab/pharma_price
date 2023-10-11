@@ -1,0 +1,29 @@
+<.header>
+  Vendor <%= @vendor.id %>
+  <:subtitle>This is a vendor record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/vendors/#{@vendor}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit vendor</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @vendor.name %></:item>
+  <:item title="Logo"><%= @vendor.logo %></:item>
+  <:item title="Logo type"><%= @vendor.logo_type %></:item>
+  <:item title="Description"><%= @vendor.description %></:item>
+</.list>
+
+<.back navigate={~p"/vendors"}>Back to vendors</.back>
+
+<.modal :if={@live_action == :edit} id="vendor-modal" show on_cancel={JS.patch(~p"/vendors/#{@vendor}")}>
+  <.live_component
+    module={PharmaPriceWeb.VendorLive.FormComponent}
+    id={@vendor.id}
+    title={@page_title}
+    action={@live_action}
+    vendor={@vendor}
+    patch={~p"/vendors/#{@vendor}"}
+  />
+</.modal>

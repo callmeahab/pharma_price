@@ -1,0 +1,44 @@
+<.header>
+  Listing Vendors
+  <:actions>
+    <.link patch={~p"/vendors/new"}>
+      <.button>New Vendor</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="vendors"
+  rows={@streams.vendors}
+  row_click={fn {_id, vendor} -> JS.navigate(~p"/vendors/#{vendor}") end}
+>
+  <:col :let={{_id, vendor}} label="Name"><%= vendor.name %></:col>
+  <:col :let={{_id, vendor}} label="Logo"><%= vendor.logo %></:col>
+  <:col :let={{_id, vendor}} label="Logo type"><%= vendor.logo_type %></:col>
+  <:col :let={{_id, vendor}} label="Description"><%= vendor.description %></:col>
+  <:action :let={{_id, vendor}}>
+    <div class="sr-only">
+      <.link navigate={~p"/vendors/#{vendor}"}>Show</.link>
+    </div>
+    <.link patch={~p"/vendors/#{vendor}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, vendor}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: vendor.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="vendor-modal" show on_cancel={JS.patch(~p"/vendors")}>
+  <.live_component
+    module={PharmaPriceWeb.VendorLive.FormComponent}
+    id={@vendor.id || :new}
+    title={@page_title}
+    action={@live_action}
+    vendor={@vendor}
+    patch={~p"/vendors"}
+  />
+</.modal>

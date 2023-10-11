@@ -57,6 +57,20 @@ defmodule PharmaPriceWeb.Router do
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
+	  
+	  live "/vendors", VendorLive.Index, :index
+	  live "/vendors/new", VendorLive.Index, :new
+	  live "/vendors/:id/edit", VendorLive.Index, :edit
+
+	  live "/vendors/:id", VendorLive.Show, :show
+	  live "/vendors/:id/show/edit", VendorLive.Show, :edit
+	  
+      live "/products", ProductLive.Index, :index
+      live "/products/new", ProductLive.Index, :new
+      live "/products/:id/edit", ProductLive.Index, :edit
+
+      live "/products/:id", ProductLive.Show, :show
+      live "/products/:id/show/edit", ProductLive.Show, :edit
     end
 
     post "/users/log_in", UserSessionController, :create
