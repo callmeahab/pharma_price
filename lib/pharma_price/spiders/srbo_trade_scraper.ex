@@ -43,7 +43,7 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
           |> String.trim_trailing()
 
         link =
-          "#{base_url()}/#{Floki.find(item, " > a") |> Floki.attribute("href") |> Floki.text()}"
+          "#{base_url()}/#{Floki.find(item, "a:not([class])") |> Floki.attribute("href") |> Floki.text()}"
 
         image =
           "#{base_url()}/#{Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()}"
