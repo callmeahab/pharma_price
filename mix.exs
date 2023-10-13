@@ -53,7 +53,8 @@ defmodule PharmaPrice.MixProject do
       {:heroicons_liveview, "~> 0.3.0"},
       {:crawly, "~> 0.16.0"},
       {:floki, "~> 0.34.0"},
-      {:csv, "~> 3.2"}
+      {:csv, "~> 3.2"},
+      {:uuid, "~> 1.1"}
     ]
   end
 
