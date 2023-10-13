@@ -1,4 +1,4 @@
-defmodule PharmaPrice.Spiders.ApotekaOnlineScraper do
+defmodule ApotekaOnlineScraper do
   alias PharmaPrice.Spiders.ScrapeItem
   use Crawly.Spider
 
@@ -74,7 +74,9 @@ defmodule PharmaPrice.Spiders.ApotekaOnlineScraper do
           Floki.find(item, ".grid-image__link") |> Floki.attribute("href") |> Floki.text()
 
         image =
-          Floki.find(item, ".grid-image__image-wrapper > img") |> Floki.attribute("data-src") |> Floki.text()
+          Floki.find(item, ".grid-image__image-wrapper > img")
+          |> Floki.attribute("data-src")
+          |> Floki.text()
 
         %ScrapeItem{title: title, price: price, link: link, image: image}
       end)

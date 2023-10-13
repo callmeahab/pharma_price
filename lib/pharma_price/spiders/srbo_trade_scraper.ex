@@ -1,4 +1,4 @@
-defmodule PharmaPrice.Spiders.SrboTradeScraper do
+defmodule SrboTradeScraper do
   alias PharmaPrice.Spiders.ScrapeItem
   use Crawly.Spider
 
