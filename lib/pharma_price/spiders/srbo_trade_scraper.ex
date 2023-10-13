@@ -28,55 +28,28 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
     items =
       document
       |> Floki.find(".productItemWrapper")
+      |> Enum.filter(&not_has_offStock/1)
       |> Enum.map(fn item ->
-        %ScrapeItem{
-          title:
-            Floki.find(item, "p")
-            |> Floki.text()
-            |> String.trim_leading()
-            |> String.trim_trailing(),
-          price:
-            Floki.find(item, ".price")
-            |> Floki.text()
-            |> String.trim_leading()
-            |> String.trim_trailing(),
-          link: Floki.find(item, "a") |> Floki.attribute("href") |> Floki.text(),
-          image: Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()
-        }
+        title =
+          Floki.find(item, "p.title")
+          |> Floki.text()
+          |> String.trim_leading()
+          |> String.trim_trailing()
+
+        price =
+          Floki.find(item, ".price")
+          |> Floki.text()
+          |> String.trim_leading()
+          |> String.trim_trailing()
+
+        link =
+          "#{base_url()}/#{Floki.find(item, " > a") |> Floki.attribute("href") |> Floki.text()}"
+
+        image =
+          "#{base_url()}/#{Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()}"
+
+        %ScrapeItem{title: title, price: price, link: link, image: image}
       end)
-
-    # # Getting search result urls
-    # urls =
-    #   document
-    #   |> Floki.find("div.s-result-list a.a-link-normal")
-    #   |> Floki.attribute("href")
-
-    # # Convert URLs into requests
-    # requests =
-    #   Enum.map(urls, fn url ->
-    #     url
-    #     |> build_absolute_url(response.request_url)
-    #     |> Crawly.Utils.request_from_url()
-    #   end)
-
-    # name =
-    #   document
-    #   |> Floki.find("span#productTitle")
-    #   |> Floki.text()
-
-    # price =
-    #   document
-    #   |> Floki.find(".a-box-group span.a-price span.a-offscreen")
-    #   |> Floki.text()
-    #   |> String.trim_leading()
-    #   |> String.trim_trailing()
-
-    # %Crawly.ParsedItem{
-    #   :requests => requests,
-    #   :items => [
-    #     %{name: name, price: price, url: response.request_url}
-    #   ]
-    # }
 
     %Crawly.ParsedItem{
       :items => items,
@@ -84,7 +57,11 @@ defmodule PharmaPrice.Spiders.SrboTradeScraper do
     }
   end
 
-  def build_absolute_url(url, request_url) do
-    URI.merge(request_url, url) |> to_string()
+  defp not_has_offStock(item) do
+    # Use pattern matching to check if the item contains ".offStock"
+    case Floki.find(item, ".offStock") do
+      [] -> true
+      _ -> false
+    end
   end
 end
