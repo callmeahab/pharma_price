@@ -9,10 +9,10 @@ defmodule PharmaPrice.Repo.Migrations.CreateProducts do
       add :photos, {:array, :string}
       add :price, :float
       add :vendor, references(:vendors, on_delete: :nothing)
-	  add :unit, :string
-	  add :qty, :string
-	  add :dosage, :string
-	  add :dosage_form, :string
+      add :unit, :string
+      add :qty, :string
+      add :dosage, :string
+      add :dosage_form, :string
 
       timestamps()
     end

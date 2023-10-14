@@ -15,7 +15,7 @@ defmodule PharmaPrice.Vendors.Vendor do
   def changeset(vendor, attrs) do
     vendor
     |> cast(attrs, [:name, :logo, :logo_type, :description])
-	  |> unique_constraint(:name)
+    |> unique_constraint(:name)
     |> validate_required([:name, :logo, :logo_type, :description])
   end
 end

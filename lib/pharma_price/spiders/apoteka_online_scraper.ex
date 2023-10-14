@@ -2,8 +2,6 @@ defmodule ApotekaOnlineScraper do
   alias PharmaPrice.Spiders.ScrapeItem
   use Crawly.Spider
 
-  @csv_file_path "apoteka_online_output.csv"
-
   @impl Crawly.Spider
   def base_url do
     "https://www.apoteka-online.rs"
@@ -85,6 +83,10 @@ defmodule ApotekaOnlineScraper do
       :items => items,
       :requests => []
     }
+  end
+
+  def build_absolute_url(url, request_url) do
+    URI.merge(request_url, url) |> to_string()
   end
 
   defp not_has_offStock(item) do

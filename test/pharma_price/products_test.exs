@@ -21,7 +21,13 @@ defmodule PharmaPrice.ProductsTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{name: "some name", url: "some url", thumbnail: "some thumbnail", photos: ["option1", "option2"], price: 120.5}
+      valid_attrs = %{
+        name: "some name",
+        url: "some url",
+        thumbnail: "some thumbnail",
+        photos: ["option1", "option2"],
+        price: 120.5
+      }
 
       assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
       assert product.name == "some name"
@@ -37,7 +43,14 @@ defmodule PharmaPrice.ProductsTest do
 
     test "update_product/2 with valid data updates the product" do
       product = product_fixture()
-      update_attrs = %{name: "some updated name", url: "some updated url", thumbnail: "some updated thumbnail", photos: ["option1"], price: 456.7}
+
+      update_attrs = %{
+        name: "some updated name",
+        url: "some updated url",
+        thumbnail: "some updated thumbnail",
+        photos: ["option1"],
+        price: 456.7
+      }
 
       assert {:ok, %Product{} = product} = Products.update_product(product, update_attrs)
       assert product.name == "some updated name"

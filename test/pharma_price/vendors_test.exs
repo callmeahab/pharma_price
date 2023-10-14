@@ -21,7 +21,12 @@ defmodule PharmaPrice.VendorsTest do
     end
 
     test "create_vendor/1 with valid data creates a vendor" do
-      valid_attrs = %{name: "some name", description: "some description", logo: "some logo", logo_type: "some logo_type"}
+      valid_attrs = %{
+        name: "some name",
+        description: "some description",
+        logo: "some logo",
+        logo_type: "some logo_type"
+      }
 
       assert {:ok, %Vendor{} = vendor} = Vendors.create_vendor(valid_attrs)
       assert vendor.name == "some name"
@@ -36,7 +41,13 @@ defmodule PharmaPrice.VendorsTest do
 
     test "update_vendor/2 with valid data updates the vendor" do
       vendor = vendor_fixture()
-      update_attrs = %{name: "some updated name", description: "some updated description", logo: "some updated logo", logo_type: "some updated logo_type"}
+
+      update_attrs = %{
+        name: "some updated name",
+        description: "some updated description",
+        logo: "some updated logo",
+        logo_type: "some updated logo_type"
+      }
 
       assert {:ok, %Vendor{} = vendor} = Vendors.update_vendor(vendor, update_attrs)
       assert vendor.name == "some updated name"

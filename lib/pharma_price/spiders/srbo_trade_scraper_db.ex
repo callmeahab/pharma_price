@@ -32,6 +32,7 @@ defmodule SrboTradeScraperDB do
     products =
       document
       |> Floki.find(".productItemWrapper")
+      |> Enum.filter(&not_has_offStock/1)
       |> Enum.map(fn item ->
         item = %ScrapeItem{
           title:
@@ -77,5 +78,13 @@ defmodule SrboTradeScraperDB do
 
   def build_absolute_url(url, request_url) do
     URI.merge(request_url, url) |> to_string()
+  end
+
+  defp not_has_offStock(item) do
+    # Use pattern matching to check if the item contains ".offStock"
+    case Floki.find(item, ".offStock") do
+      [] -> true
+      _ -> false
+    end
   end
 end

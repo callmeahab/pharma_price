@@ -4,8 +4,20 @@ defmodule PharmaPriceWeb.ProductLiveTest do
   import Phoenix.LiveViewTest
   import PharmaPrice.ProductsFixtures
 
-  @create_attrs %{name: "some name", url: "some url", thumbnail: "some thumbnail", photos: ["option1", "option2"], price: 120.5}
-  @update_attrs %{name: "some updated name", url: "some updated url", thumbnail: "some updated thumbnail", photos: ["option1"], price: 456.7}
+  @create_attrs %{
+    name: "some name",
+    url: "some url",
+    thumbnail: "some thumbnail",
+    photos: ["option1", "option2"],
+    price: 120.5
+  }
+  @update_attrs %{
+    name: "some updated name",
+    url: "some updated url",
+    thumbnail: "some updated thumbnail",
+    photos: ["option1"],
+    price: 456.7
+  }
   @invalid_attrs %{name: nil, url: nil, thumbnail: nil, photos: [], price: nil}
 
   defp create_product(_) do

@@ -4,8 +4,18 @@ defmodule PharmaPriceWeb.VendorLiveTest do
   import Phoenix.LiveViewTest
   import PharmaPrice.VendorsFixtures
 
-  @create_attrs %{name: "some name", description: "some description", logo: "some logo", logo_type: "some logo_type"}
-  @update_attrs %{name: "some updated name", description: "some updated description", logo: "some updated logo", logo_type: "some updated logo_type"}
+  @create_attrs %{
+    name: "some name",
+    description: "some description",
+    logo: "some logo",
+    logo_type: "some logo_type"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    description: "some updated description",
+    logo: "some updated logo",
+    logo_type: "some updated logo_type"
+  }
   @invalid_attrs %{name: nil, description: nil, logo: nil, logo_type: nil}
 
   defp create_vendor(_) do

@@ -2,8 +2,6 @@ defmodule SrboTradeScraper do
   alias PharmaPrice.Spiders.ScrapeItem
   use Crawly.Spider
 
-  @csv_file_path "srbo_trade_output.csv"
-
   @impl Crawly.Spider
   def base_url do
     "https://www.apotekasrbotrade.rs"
@@ -55,6 +53,10 @@ defmodule SrboTradeScraper do
       :items => items,
       :requests => []
     }
+  end
+
+  def build_absolute_url(url, request_url) do
+    URI.merge(request_url, url) |> to_string()
   end
 
   defp not_has_offStock(item) do

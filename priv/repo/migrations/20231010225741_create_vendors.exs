@@ -11,6 +11,6 @@ defmodule PharmaPrice.Repo.Migrations.CreateVendors do
       timestamps()
     end
 
-	create unique_index(:vendors, [:name])
+    create unique_index(:vendors, [:name])
   end
 end
