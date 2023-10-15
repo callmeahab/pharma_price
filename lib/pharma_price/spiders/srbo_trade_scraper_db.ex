@@ -45,8 +45,10 @@ defmodule SrboTradeScraperDB do
             |> Floki.text()
             |> String.trim_leading()
             |> String.trim_trailing(),
-          link: Floki.find(item, "a") |> Floki.attribute("href") |> Floki.text(),
-          image: Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()
+          link:
+            "#{base_url()}/#{Floki.find(item, "a") |> Floki.attribute("href") |> Floki.text()}",
+          image:
+            "#{base_url()}/#{Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()}"
         }
 
         {price, _} =

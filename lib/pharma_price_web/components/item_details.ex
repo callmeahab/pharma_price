@@ -3,25 +3,7 @@ defmodule PharmaPriceWeb.ItemDetails do
 
   def render(assigns) do
     ~H"""
-    <div
-      :if={@selected_item}
-      class="drawer drawer-item-details drawer-right"
-      phx-mounted={
-        JS.show(
-          to: ".drawer-item-details",
-          display: "flex",
-          transition: {"ease-in duration-200", "translate-x-full", "translate-x-full - 450px"},
-          time: 200
-        )
-      }
-      phx-remove={
-        JS.hide(
-          to: ".drawer-item-details",
-          transition: {"ease-in duration-200", "translate-x-0", "translate-x-full"},
-          time: 200
-        )
-      }
-    >
+    <div class="drawer drawer-item-details drawer-right">
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center relative px-[30px] py-[20px]">
           <button
@@ -39,7 +21,7 @@ defmodule PharmaPriceWeb.ItemDetails do
               </path>
             </svg>
           </button>
-          <h2 class="font-bold text-[20px] m-0">Details</h2>
+          <h2 class="font-bold text-[20px] m-0">Detalji</h2>
         </div>
         <div class="os-host os-host-foreign details-scrollbar flex-grow os-theme-thin os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
           <div class="os-resize-observer-host observed">
@@ -57,35 +39,35 @@ defmodule PharmaPriceWeb.ItemDetails do
               <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
                 <div class="flex flex-col p-[30px] pt-0">
                   <div class="flex items-center justify-center w-full h-[360px] overflow-hidden rounded mb-[30px]">
-                    <img
-                      src="https://s3.amazonaws.com/redqteam.com/medsy/products/fibre_sy4q5v.jpg"
-                      alt="Trueplus Fibre Food Supplement 90 Tablets-img"
-                    />
+                    <img src={@selected_item.thumbnail} alt={@selected_item.name} />
                   </div>
                   <div class="flex flex-col items-start mb-4">
-                    <span class="text-gray-900 font-semibold mb-2">$2.5</span><span class="mb-3">Trueplus Fibre Food Supplement 90 Tablets</span>
+                    <span class="text-gray-900 font-semibold mb-2">
+                      <%= @selected_item.price %> RSD
+                    </span>
+                    <span class="mb-3"><%= @selected_item.name %></span>
                     <p class="flex items-center mb-5">
-                      <span class=" text-gray-500 text-[11px] capitalize">Tablet</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3"></span><span class=" text-gray-500 text-[11px]">90 pieces</span>
+                      <span class=" text-gray-500 text-[11px] capitalize">Tablete</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3"></span><span class=" text-gray-500 text-[11px]">90 pieces</span>
                     </p>
                     <button
                       class="font-semibold text-[11px] text-gray-800 mt-2 focus:outline-none"
                       aria-label="details"
                     >
-                      More Details
+                      Vise detalja
                     </button>
                   </div>
                   <div class="flex w-full flex-col">
                     <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
-                      <span class="text-gray-500 text-[11px] mb-2">Dosages Form</span><span class="font-normal text-[13px] text-gray-900 capitalize">Tablet</span>
+                      <span class="text-gray-500 text-[11px] mb-2">Tip doziranja</span><span class="font-normal text-[13px] text-gray-900 capitalize">Tablet</span>
                     </div>
                     <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
-                      <span class="text-gray-500 text-[11px] mb-2">Dosages</span><span class="font-normal text-[13px] text-gray-900 capitalize">as per doctor advice</span>
+                      <span class="text-gray-500 text-[11px] mb-2">Doza</span><span class="font-normal text-[13px] text-gray-900 capitalize">as per doctor advice</span>
                     </div>
                     <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
-                      <span class="text-gray-500 text-[11px] mb-2">Active Substance</span><span class="font-normal text-[13px] text-gray-900 capitalize">Anti-caking agent (Sorbitol), Gum Acacia, Resistant Maltodextrin,</span>
+                      <span class="text-gray-500 text-[11px] mb-2">Aktivna supstanca</span><span class="font-normal text-[13px] text-gray-900 capitalize">Anti-caking agent (Sorbitol), Gum Acacia, Resistant Maltodextrin,</span>
                     </div>
                     <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
-                      <span class="text-gray-500 text-[11px] mb-2">Manufacturer</span><span class="font-normal text-[13px] text-gray-900 capitalize">Trividia</span>
+                      <span class="text-gray-500 text-[11px] mb-2">Proizvodjac</span><span class="font-normal text-[13px] text-gray-900 capitalize">Trividia</span>
                     </div>
                   </div>
                 </div>
@@ -110,7 +92,7 @@ defmodule PharmaPriceWeb.ItemDetails do
           <div class="os-scrollbar-corner"></div>
         </div>
         <div class="flex flex-col p-[30px]">
-          <%= if @cart[@selected_item["id"]] && @cart[@selected_item["id"]]["count"] > 0 do %>
+          <%= if @cart[@selected_item.id] && @cart[@selected_item.id]["count"] > 0 do %>
             <div
               class="group flex items-center justify-between flex-shrink-0 rounded overflow-hidden bg-gray-900 shadow-floatingUp h-12 ml-auto w-full big"
               phx-mounted={
@@ -124,18 +106,18 @@ defmodule PharmaPriceWeb.ItemDetails do
                 class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[60px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
                 aria-label="button"
                 phx-click="dec_count"
-                phx-value-id={@selected_item["id"]}
+                phx-value-id={@selected_item.id}
               >
                 <Heroicons.Outline.minus class="h-5 w-5" />
               </button>
               <span class="font-semibold text-[13px] text-white flex items-center justify-center h-full w-[40px] transition-colors duration-250 ease-in-out cursor-default">
-                <%= @cart[@selected_item["id"]]["count"] %>
+                <%= @cart[@selected_item.id]["count"] %>
               </span>
               <button
                 class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[60px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
                 aria-label="button"
                 phx-click="inc_count"
-                phx-value-id={@selected_item["id"]}
+                phx-value-id={@selected_item.id}
               >
                 <Heroicons.Outline.plus class="h-5 w-5" />
               </button>
@@ -146,7 +128,7 @@ defmodule PharmaPriceWeb.ItemDetails do
               type="button"
               aria-label="button"
               phx-click="inc_count"
-              phx-value-id={@selected_item["id"]}
+              phx-value-id={@selected_item.id}
               phx-mounted={
                 JS.show(
                   transition: {"ease-in duration-200", "opacity-0", "opacity-100"},
