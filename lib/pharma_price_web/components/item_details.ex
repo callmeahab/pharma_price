@@ -8,6 +8,8 @@ defmodule PharmaPriceWeb.ItemDetails do
         currency: "RSD"
       )
 
+    assigns = assign(assigns, :selected_item, %{assigns.selected_item | price: price})
+
     ~H"""
     <div id="drawer-item-details" class="drawer drawer-item-details drawer-right">
       <div class="flex flex-col w-full h-full">
@@ -49,7 +51,7 @@ defmodule PharmaPriceWeb.ItemDetails do
                   </div>
                   <div class="flex flex-col items-start mb-4">
                     <span class="text-gray-900 font-semibold mb-2">
-                      <%= price %>
+                      <%= @select_item.price %>
                     </span>
                     <span class="mb-3"><%= @selected_item.name %></span>
                     <p class="flex items-center mb-5">

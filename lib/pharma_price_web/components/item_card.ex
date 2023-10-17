@@ -3,7 +3,12 @@ defmodule PharmaPriceWeb.ItemCard do
 
   def main(assigns) do
     {_, price} =
-      PharmaPrice.Cldr.Number.to_string(assigns.item.price, locale: "de", currency: "RSD")
+      PharmaPrice.Cldr.Number.to_string(assigns.item.price,
+        locale: "de",
+        currency: "RSD"
+      )
+
+    assigns = assign(assigns, :item, %{assigns.item | price: price})
 
     ~H"""
     <div class="w-full flex flex-col border border-gray-300 rounded p-4 bg-white transition duration-350 ease-in-out shadow-cart">
@@ -43,7 +48,7 @@ defmodule PharmaPriceWeb.ItemCard do
         </div>
         <div class="flex flex-col w-full items-start overflow-hidden">
           <span class="font-semibold text-gray-900 mb-1 text-[16px]">
-            <%= price %>
+            <%= @item.price %>
           </span>
           <span class="text-[13px] text-gray-700 truncate w-full"><%= @item.name %></span>
           <div class="flex items-center my-1 overflow-hidden w-full">
