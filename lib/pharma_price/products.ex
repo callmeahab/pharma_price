@@ -18,7 +18,7 @@ defmodule PharmaPrice.Products do
 
   """
   def list_products do
-    Repo.all(Product |> limit(200))
+    Repo.all(Product |> limit(20))
   end
 
   @doc """

@@ -2,8 +2,14 @@ defmodule PharmaPriceWeb.ItemDetails do
   use PharmaPriceWeb, :html
 
   def render(assigns) do
+    {_, price} =
+      PharmaPrice.Cldr.Number.to_string(assigns.selected_item.price,
+        locale: "de",
+        currency: "RSD"
+      )
+
     ~H"""
-    <div class="drawer drawer-item-details drawer-right">
+    <div id="drawer-item-details" class="drawer drawer-item-details drawer-right">
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center relative px-[30px] py-[20px]">
           <button
@@ -43,7 +49,7 @@ defmodule PharmaPriceWeb.ItemDetails do
                   </div>
                   <div class="flex flex-col items-start mb-4">
                     <span class="text-gray-900 font-semibold mb-2">
-                      <%= @selected_item.price %> RSD
+                      <%= price %>
                     </span>
                     <span class="mb-3"><%= @selected_item.name %></span>
                     <p class="flex items-center mb-5">

@@ -17,13 +17,6 @@ defmodule PharmaPriceWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PharmaPriceWeb do
-    pipe_through :browser
-
-    live "/", PageLive.Index, :index
-    live "/map", PageLive.Map, :index
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", PharmaPriceWeb do
   #   pipe_through :api
@@ -57,6 +50,18 @@ defmodule PharmaPriceWeb.Router do
       live "/users/log_in", UserLoginLive, :new
       live "/users/reset_password", UserForgotPasswordLive, :new
       live "/users/reset_password/:token", UserResetPasswordLive, :edit
+    end
+
+    post "/users/log_in", UserSessionController, :create
+  end
+
+  scope "/", PharmaPriceWeb do
+    pipe_through [:browser, :require_authenticated_user]
+
+    live_session :require_authenticated_user,
+      on_mount: [{PharmaPriceWeb.UserAuth, :ensure_authenticated}] do
+      live "/users/settings", UserSettingsLive, :edit
+      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
 
       live "/vendors", VendorLive.Index, :index
       live "/vendors/new", VendorLive.Index, :new
@@ -72,18 +77,6 @@ defmodule PharmaPriceWeb.Router do
       live "/products/:id", ProductLive.Show, :show
       live "/products/:id/show/edit", ProductLive.Show, :edit
     end
-
-    post "/users/log_in", UserSessionController, :create
-  end
-
-  scope "/", PharmaPriceWeb do
-    pipe_through [:browser, :require_authenticated_user]
-
-    live_session :require_authenticated_user,
-      on_mount: [{PharmaPriceWeb.UserAuth, :ensure_authenticated}] do
-      live "/users/settings", UserSettingsLive, :edit
-      live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
-    end
   end
 
   scope "/", PharmaPriceWeb do
@@ -96,5 +89,12 @@ defmodule PharmaPriceWeb.Router do
       live "/users/confirm/:token", UserConfirmationLive, :edit
       live "/users/confirm", UserConfirmationInstructionsLive, :new
     end
+  end
+
+  scope "/", PharmaPriceWeb do
+    pipe_through :browser
+
+    live "/", PageLive.Index, :index
+    live "/map", PageLive.Map, :index
   end
 end

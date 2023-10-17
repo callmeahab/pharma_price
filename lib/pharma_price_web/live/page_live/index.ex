@@ -17,6 +17,8 @@ defmodule PharmaPriceWeb.PageLive.Index do
 
   @impl true
   def handle_event("inc_count", %{"id" => id}, socket) do
+    {id, _} = Integer.parse(id)
+
     cart =
       case Map.get(socket.assigns.cart, id) do
         nil ->
@@ -37,6 +39,8 @@ defmodule PharmaPriceWeb.PageLive.Index do
 
   @impl true
   def handle_event("dec_count", %{"id" => id}, socket) do
+    {id, _} = Integer.parse(id)
+
     cart =
       case Map.get(socket.assigns.cart, id) do
         nil ->
@@ -72,16 +76,19 @@ defmodule PharmaPriceWeb.PageLive.Index do
       :if={@selected_item}
       phx-mounted={
         JS.show(
-          to: ".drawer-item-details",
+          to: "#drawer-item-details",
           display: "flex",
-          transition: {"ease-in duration-200", "translate-x-full", "translate-x-full - 450px"},
+          transition:
+            {"transition-all transform ease-out duration-200", "translate-x-full",
+             "translate-x-full - 450px"},
           time: 200
         )
       }
       phx-remove={
         JS.hide(
-          to: ".drawer-item-details",
-          transition: {"ease-in duration-200", "translate-x-0", "translate-x-full"},
+          to: "#drawer-item-details",
+          transition:
+            {"transition-all transform ease-in duration-200", "translate-x-0", "translate-x-full"},
           time: 200
         )
       }
@@ -91,7 +98,7 @@ defmodule PharmaPriceWeb.PageLive.Index do
 
     <div class="w-full mt-[35px] xxl:mt-[60px] px-4 lg:px-[35px] pb-10">
       <div class="grid grid-cols-1 gap-x-3 gap-y-3 mt-9 md:grid-cols-2 md:gap-x-4 md:gap-y-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 xl:gap-y-4 xxl:grid-cols-4 large:grid-cols-5">
-        <%= for {_id, item} <- @streams.items do %>
+        <%= for {_, item} <- @streams.items do %>
           <ItemCard.main item={item} cart={@cart} />
         <% end %>
       </div>

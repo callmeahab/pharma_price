@@ -2,6 +2,9 @@ defmodule PharmaPriceWeb.ItemCard do
   use PharmaPriceWeb, :html
 
   def main(assigns) do
+    {_, price} =
+      PharmaPrice.Cldr.Number.to_string(assigns.item.price, locale: "de", currency: "RSD")
+
     ~H"""
     <div class="w-full flex flex-col border border-gray-300 rounded p-4 bg-white transition duration-350 ease-in-out shadow-cart">
       <div class="flex flex-row items-start">
@@ -40,7 +43,7 @@ defmodule PharmaPriceWeb.ItemCard do
         </div>
         <div class="flex flex-col w-full items-start overflow-hidden">
           <span class="font-semibold text-gray-900 mb-1 text-[16px]">
-            <%= @item.price %> RSD
+            <%= price %>
           </span>
           <span class="text-[13px] text-gray-700 truncate w-full"><%= @item.name %></span>
           <div class="flex items-center my-1 overflow-hidden w-full">
@@ -120,18 +123,6 @@ defmodule PharmaPriceWeb.ItemCard do
         </div>
       </div>
     </div>
-    """
-  end
-
-  def count_not_exists(assigns) do
-    ~H"""
-
-    """
-  end
-
-  def count_exists(assigns) do
-    ~H"""
-
     """
   end
 end
