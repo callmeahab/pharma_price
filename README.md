@@ -15,6 +15,8 @@ Setup:
   * Run: `createdb postgres`
   * Run: `psql`
   * Run: `alter user postgres with superuser;`
+  * Run: `brew install meilisearch`
+  * Run: `brew services start meilisearch`
 
 
 To start your Phoenix server:

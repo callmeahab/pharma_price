@@ -18,7 +18,7 @@ defmodule PharmaPriceWeb.SearchHeader do
         <p class="text-[17px] text-gray-700 drop-shadow-[0_35px_35px_rgba(255,255,255,1)] lg:mb-[60px] text-center leading-loose">
           Start searching for your medicine to find the best deals near you.
         </p>
-        <SearchInput.main />
+        <SearchInput.main q={@q} />
         <span style="font-size:0"></span>
       </div>
     </div>

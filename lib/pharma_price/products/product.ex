@@ -2,6 +2,8 @@ defmodule PharmaPrice.Products.Product do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, except: [:__meta__, :__struct__]}
+
   schema "products" do
     field :name, :string
     field :url, :string
@@ -13,6 +15,7 @@ defmodule PharmaPrice.Products.Product do
     field :qty, :string
     field :dosage, :string
     field :dosage_form, :string
+    field :description, :string
 
     timestamps()
   end
@@ -30,7 +33,8 @@ defmodule PharmaPrice.Products.Product do
       :unit,
       :qty,
       :dosage,
-      :dosage_form
+      :dosage_form,
+      :description
     ])
     |> validate_required([:name, :url, :thumbnail, :photos, :price, :vendor])
   end

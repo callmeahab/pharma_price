@@ -36,7 +36,7 @@ defmodule SrboTradeScraperDB do
       |> Enum.map(fn item ->
         item = %ScrapeItem{
           title:
-            Floki.find(item, "p")
+            Floki.find(item, "p.title")
             |> Floki.text()
             |> String.trim_leading()
             |> String.trim_trailing(),
@@ -46,7 +46,7 @@ defmodule SrboTradeScraperDB do
             |> String.trim_leading()
             |> String.trim_trailing(),
           link:
-            "#{base_url()}/#{Floki.find(item, "a") |> Floki.attribute("href") |> Floki.text()}",
+            "#{base_url()}/#{Floki.find(item, "a:not([class])") |> Floki.attribute("href") |> Floki.text()}",
           image:
             "#{base_url()}/#{Floki.find(item, "img") |> Floki.attribute("src") |> Floki.text()}"
         }
@@ -71,6 +71,9 @@ defmodule SrboTradeScraperDB do
       Multi.insert(multi, UUID.uuid1(), product)
     end)
     |> Repo.transaction()
+
+    Meilisearch.Indexes.create("products_index")
+    Meilisearch.Documents.add_or_replace("products_index", products)
 
     %Crawly.ParsedItem{
       :items => [],

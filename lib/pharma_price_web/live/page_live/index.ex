@@ -10,9 +10,11 @@ defmodule PharmaPriceWeb.PageLive.Index do
 
     {:ok,
      socket
-     |> stream(:items, Products.list_products())
+     |> assign(:items, Products.list_products())
      |> assign(:selected_item, selected_item)
-     |> assign(:cart, cart)}
+     |> assign(:cart, cart)
+     |> assign(:q, nil)
+     |> assign(:search_results, [])}
   end
 
   @impl true
@@ -58,6 +60,18 @@ defmodule PharmaPriceWeb.PageLive.Index do
   end
 
   @impl true
+  def handle_event("search", %{"search" => q}, socket) do
+    {:ok, results} =
+      Meilisearch.Search.search("products_index", q)
+
+    results =
+      results["hits"]
+      |> Enum.map(fn r -> r |> Map.new(fn {k, v} -> {String.to_atom(k), v} end) end)
+
+    {:noreply, socket |> assign(:search_results, results)}
+  end
+
+  @impl true
   def handle_event("select_item", %{"id" => id}, socket) do
     {:noreply, socket |> assign(:selected_item, Products.get_product!(id))}
   end
@@ -70,8 +84,8 @@ defmodule PharmaPriceWeb.PageLive.Index do
   @impl true
   def render(assigns) do
     ~H"""
-    <SearchHeader.render />
-    <HeroInfo.render />
+    <SearchHeader.render q={@q} />
+    <HeroInfo.render :if={length(@search_results) == 0} />
     <ItemDetails.render
       :if={@selected_item}
       phx-mounted={
@@ -98,8 +112,14 @@ defmodule PharmaPriceWeb.PageLive.Index do
 
     <div class="w-full mt-[35px] xxl:mt-[60px] px-4 lg:px-[35px] pb-10">
       <div class="grid grid-cols-1 gap-x-3 gap-y-3 mt-9 md:grid-cols-2 md:gap-x-4 md:gap-y-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 xl:gap-y-4 xxl:grid-cols-4 large:grid-cols-5">
-        <%= for {_, item} <- @streams.items do %>
-          <ItemCard.main item={item} cart={@cart} />
+        <%= if length(@search_results) > 0 do %>
+          <%= for item <- @search_results do %>
+            <ItemCard.main item={item} cart={@cart} />
+          <% end %>
+        <% else %>
+          <%= for item <- @items do %>
+            <ItemCard.main item={item} cart={@cart} />
+          <% end %>
         <% end %>
       </div>
     </div>

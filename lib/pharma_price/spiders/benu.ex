@@ -63,8 +63,12 @@ defmodule BenuScraper do
     if next_page_button == [] do
       []
     else
-      url = "#{base_url()}#{Floki.attribute(List.first(next_page_button), "href")}"
-      [Crawly.Request.new(url: url, callback: :parse_item)]
+      url =
+        "#{base_url()}#{Floki.attribute(List.first(next_page_button), "href")}"
+        |> Crawly.Utils.request_from_url()
+
+      [url]
+      # [Crawly.Request.new(url: url, callback: :parse_item)]
     end
   end
 end

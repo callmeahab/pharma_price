@@ -55,7 +55,8 @@ defmodule PharmaPrice.MixProject do
       {:floki, "~> 0.34.0"},
       {:csv, "~> 3.2"},
       {:uuid, "~> 1.1"},
-      {:ex_cldr_numbers, "~> 2.3"}
+      {:ex_cldr_numbers, "~> 2.3"},
+      {:meilisearch, "~> 0.20"}
     ]
   end
 
