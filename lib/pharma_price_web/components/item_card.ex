@@ -38,7 +38,7 @@ defmodule PharmaPriceWeb.ItemCard do
               <img
                 alt={@item.name}
                 src={@item.thumbnail}
-                srcset="/images/fibre_sy4q5v.webp"
+                srcset={@item.thumbnail}
                 decoding="async"
                 data-nimg="intrinsic"
                 style="position:absolute;top:0;left:0;bottom:0;right:0;box-sizing:border-box;padding:0;border:none;margin:auto;display:block;width:0;height:0;min-width:100%;max-width:100%;min-height:100%;max-height:100%"
@@ -58,7 +58,7 @@ defmodule PharmaPriceWeb.ItemCard do
           </div>
 
           <div class="flex font-semibold text-sm py-6">
-            <img src={@vendor.logo} alt="" class="h-10" />
+            <img src={@vendor.logo} alt="" class="h-10" decoding="async" data-nimg="intrinsic" />
           </div>
 
           <div class="flex-grow">
