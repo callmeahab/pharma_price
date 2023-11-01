@@ -2,8 +2,6 @@ defmodule PharmaPriceWeb.SearchInput do
   use PharmaPriceWeb, :html
 
   def main(assigns) do
-    IO.inspect(assigns)
-
     ~H"""
     <.form
       :let={f}
@@ -16,7 +14,6 @@ defmodule PharmaPriceWeb.SearchInput do
       class="items-center justify-center w-full lg:max-w-screen-md rounded relative overflow-hidden hidden lg:flex"
     >
       <.search_input
-        autocomplete="off"
         type="search"
         name="search"
         field={f[:q]}

@@ -1,5 +1,6 @@
 defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
   alias PharmaPrice.Products
+  alias PharmaPrice.Vendors
   alias PharmaPriceWeb.{SearchHeader, ItemCard, ItemDetails, HeroInfo}
   use PharmaPriceWeb, :live_view
 
@@ -8,6 +9,7 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
     {:ok,
      socket
      |> assign(:items, Products.list_products())
+     |> assign(:vendors, Vendors.list_vendors())
      |> assign(:product, nil)
      |> assign(:cart, %{})
      |> assign(:q, nil)

@@ -395,6 +395,7 @@ defmodule PharmaPriceWeb.CoreComponents do
     </span>
     <label for="search-normal" class="sr-only">search-normal</label>
     <input
+      autocomplete="off"
       type={@type}
       name={@name}
       id={@id}
