@@ -14,18 +14,20 @@ defmodule PharmaPriceWeb.ItemDetails do
     <div
       id="drawer-item-details"
       phx-mounted={
-        JS.transition(
-          {"ease-in-out duration-200", "opacity-0", "opacity-100"},
+        JS.remove_class("drawer-offset",
+          to: "#drawer-item-details",
+          transition: "ease-in duration-200 -translate-x-full",
           time: 200
         )
       }
       phx-remove={
-        JS.transition(
-          {"ease-in-out duration-200", "translate-x-full opacity-100", "opacity-0"},
+        JS.add_class("drawer-offset",
+          to: "#drawer-item-details",
+          transition: "ease-out duration-200 translate-x-full",
           time: 200
         )
       }
-      class="drawer drawer-item-details drawer-right absolute opacity-0"
+      class="drawer drawer-item-details drawer-right absolute drawer-offset"
     >
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center relative px-[30px] py-[20px]">
@@ -91,6 +93,11 @@ defmodule PharmaPriceWeb.ItemDetails do
                     </div>
                     <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
                       <span class="text-gray-500 text-[11px] mb-2">Proizvodjac</span><span class="font-normal text-[13px] text-gray-900 capitalize">Trividia</span>
+                    </div>
+
+                    <div class="flex flex-col justify-start full mt-10 pr-[30px] even:pr-0">
+                      <span class="text-gray-500 text-[11px] mb-2">Apoteka</span>
+                      <span><img alt="" src={@vendor.logo} class="h-10" /></span>
                     </div>
                   </div>
                 </div>

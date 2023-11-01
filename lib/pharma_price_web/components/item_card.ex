@@ -8,7 +8,9 @@ defmodule PharmaPriceWeb.ItemCard do
         currency: "RSD"
       )
 
-    assigns = assign(assigns, :item, %{assigns.item | price: price})
+    assigns =
+      assigns
+      |> assign(:item, %{assigns.item | price: price})
 
     ~H"""
     <div class="w-full flex flex-col border border-gray-300 rounded p-4 bg-white transition duration-350 ease-in-out shadow-cart">
@@ -46,15 +48,20 @@ defmodule PharmaPriceWeb.ItemCard do
             </noscript>
           </div>
         </div>
-        <div class="flex flex-col w-full items-start overflow-hidden">
+        <div class="flex flex-col w-full h-full items-start overflow-hidden">
           <span class="font-semibold text-gray-900 mb-1 text-[16px]">
-            <%= @item.price %>
+            <%= @item.name %>
           </span>
-          <span class="text-[13px] text-gray-700 truncate w-full"><%= @item.name %></span>
+          <span class="text-[13px] text-gray-700 truncate w-full"><%= @item.price %></span>
           <div class="flex items-center my-1 overflow-hidden w-full">
             <span class="text-gray-500 text-[11px] capitalize">Tablet</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3 flex-shrink-0"></span><span class="text-gray-500 text-[11px] truncate">90<!-- --> Pieces</span>
           </div>
-          <div class="my-auto">
+
+          <div class="flex font-semibold text-sm py-6">
+            <img src={@vendor.logo} alt="" class="h-10" />
+          </div>
+
+          <div class="flex-grow">
             <.link
               class="text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none"
               patch={~p"/item-details/#{@item.id}"}
@@ -62,7 +69,7 @@ defmodule PharmaPriceWeb.ItemCard do
               Detaljniji opis
             </.link>
           </div>
-          <div class="ml-auto mt-2 w-full flex align-bottom justify-end items-end">
+          <div class="ml-auto mt-2 w-full flex justify-end items-end">
             <div class="relative h-[35px] flex-shrink-0 rounded overflow-hidden ">
               <div style="width: 110px; height: 100%;">
                 <div class="group flex items-center justify-between h-[35px] rounded absolute top-0 right-0 bg-gray-900">
