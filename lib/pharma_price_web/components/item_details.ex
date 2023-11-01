@@ -3,21 +3,36 @@ defmodule PharmaPriceWeb.ItemDetails do
 
   def render(assigns) do
     {_, price} =
-      PharmaPrice.Cldr.Number.to_string(assigns.selected_item.price,
+      PharmaPrice.Cldr.Number.to_string(assigns.product.price,
         locale: "de",
         currency: "RSD"
       )
 
-    assigns = assign(assigns, :selected_item, %{assigns.selected_item | price: price})
+    assigns = assign(assigns, :product, %{assigns.product | price: price})
 
     ~H"""
-    <div id="drawer-item-details" class="drawer drawer-item-details drawer-right">
+    <div
+      id="drawer-item-details"
+      phx-mounted={
+        JS.transition(
+          {"ease-in-out duration-200", "opacity-0", "opacity-100"},
+          time: 200
+        )
+      }
+      phx-remove={
+        JS.transition(
+          {"ease-in-out duration-200", "translate-x-full opacity-100", "opacity-0"},
+          time: 200
+        )
+      }
+      class="drawer drawer-item-details drawer-right absolute opacity-0"
+    >
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center relative px-[30px] py-[20px]">
           <button
             class="w-auto h-10 flex items-center justify-center text-gray-400 absolute top-half -mt-[4px] left-[30px] transition duration-300 focus:outline-none hover:text-pink-600 hover:scale-125"
             aria-label="close"
-            phx-click="deselect_item"
+            phx-click={JS.patch(~p"/")}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="19px" height="12px" viewBox="0 0 18.738 12">
               <path
@@ -47,13 +62,13 @@ defmodule PharmaPriceWeb.ItemDetails do
               <div class="os-content" style="padding: 0px; height: 100%; width: 100%;">
                 <div class="flex flex-col p-[30px] pt-0">
                   <div class="flex items-center justify-center w-full h-[360px] overflow-hidden rounded mb-[30px]">
-                    <img src={@selected_item.thumbnail} alt={@selected_item.name} />
+                    <img src={@product.thumbnail} alt={@product.name} />
                   </div>
                   <div class="flex flex-col items-start mb-4">
                     <span class="text-gray-900 font-semibold mb-2">
-                      <%= @select_item.price %>
+                      <%= @product.price %>
                     </span>
-                    <span class="mb-3"><%= @selected_item.name %></span>
+                    <span class="mb-3"><%= @product.name %></span>
                     <p class="flex items-center mb-5">
                       <span class=" text-gray-500 text-[11px] capitalize">Tablete</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3"></span><span class=" text-gray-500 text-[11px]">90 pieces</span>
                     </p>
@@ -100,7 +115,7 @@ defmodule PharmaPriceWeb.ItemDetails do
           <div class="os-scrollbar-corner"></div>
         </div>
         <div class="flex flex-col p-[30px]">
-          <%= if @cart[@selected_item.id] && @cart[@selected_item.id]["count"] > 0 do %>
+          <%= if @cart[@product.id] && @cart[@product.id]["count"] > 0 do %>
             <div
               class="group flex items-center justify-between flex-shrink-0 rounded overflow-hidden bg-gray-900 shadow-floatingUp h-12 ml-auto w-full big"
               phx-mounted={
@@ -114,18 +129,18 @@ defmodule PharmaPriceWeb.ItemDetails do
                 class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[60px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
                 aria-label="button"
                 phx-click="dec_count"
-                phx-value-id={@selected_item.id}
+                phx-value-id={@product.id}
               >
                 <Heroicons.Outline.minus class="h-5 w-5" />
               </button>
               <span class="font-semibold text-[13px] text-white flex items-center justify-center h-full w-[40px] transition-colors duration-250 ease-in-out cursor-default">
-                <%= @cart[@selected_item.id]["count"] %>
+                <%= @cart[@product.id]["count"] %>
               </span>
               <button
                 class="flex items-center justify-center outline-none duration-250 ease-in-out h-full w-[60px] text-white bg-gray-900 transition duration-300 hover:bg-gray-700 focus:outline-none"
                 aria-label="button"
                 phx-click="inc_count"
-                phx-value-id={@selected_item.id}
+                phx-value-id={@product.id}
               >
                 <Heroicons.Outline.plus class="h-5 w-5" />
               </button>
@@ -136,7 +151,7 @@ defmodule PharmaPriceWeb.ItemDetails do
               type="button"
               aria-label="button"
               phx-click="inc_count"
-              phx-value-id={@selected_item.id}
+              phx-value-id={@product.id}
               phx-mounted={
                 JS.show(
                   transition: {"ease-in duration-200", "opacity-0", "opacity-100"},

@@ -1,4 +1,5 @@
 defmodule PharmaPriceWeb.Router do
+  alias PharmaPriceWeb.PageLive
   use PharmaPriceWeb, :router
 
   import PharmaPriceWeb.UserAuth
@@ -95,6 +96,7 @@ defmodule PharmaPriceWeb.Router do
     pipe_through :browser
 
     live "/", PageLive.Index, :index
+    live "/item-details/:id", PageLive.Index, :details
     live "/map", PageLive.Map, :index
   end
 end

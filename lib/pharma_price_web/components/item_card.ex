@@ -54,13 +54,12 @@ defmodule PharmaPriceWeb.ItemCard do
           <div class="flex items-center my-1 overflow-hidden w-full">
             <span class="text-gray-500 text-[11px] capitalize">Tablet</span><span class="flex bg-gray-500 w-[3px] h-[3px] rounded mx-3 flex-shrink-0"></span><span class="text-gray-500 text-[11px] truncate">90<!-- --> Pieces</span>
           </div>
-          <button
+          <.link
             class="text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none"
-            phx-click="select_item"
-            phx-value-id={@item.id}
+            patch={~p"/item-details/#{@item.id}"}
           >
             Detaljniji opis
-          </button>
+          </.link>
           <div class="ml-auto mt-2 w-full flex justify-end items-end">
             <div class="relative h-[35px] flex-shrink-0 rounded overflow-hidden ">
               <div style="width: 110px; height: 100%;">

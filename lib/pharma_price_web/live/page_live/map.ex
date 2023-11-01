@@ -1,4 +1,4 @@
-defmodule PharmaPriceWeb.PageLive.Map do
+defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Map do
   use PharmaPriceWeb, :live_view
 
   @impl true
