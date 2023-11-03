@@ -61,15 +61,14 @@ defmodule PharmaPriceWeb.ItemCard do
             <img src={@vendor.logo} alt="" class="h-10" decoding="async" data-nimg="intrinsic" />
           </div>
 
-          <div class="flex-grow">
-            <.link
-              class="text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none"
-              patch={~p"/item-details/#{@item.id}"}
-            >
-              Detaljniji opis
-            </.link>
-          </div>
-          <div class="ml-auto mt-2 w-full flex justify-end items-end">
+          <.link
+            class="flex-grow text-[11px] font-semibold text-gray-900 mt-1 focus:outline-none"
+            patch={~p"/item-details/#{@item.id}"}
+          >
+            Detaljniji opis
+          </.link>
+
+          <div class="ml-auto mt-3 w-full flex justify-end items-end">
             <div class="relative h-[35px] flex-shrink-0 rounded overflow-hidden ">
               <div style="width: 110px; height: 100%;">
                 <div class="group flex items-center justify-between h-[35px] rounded absolute top-0 right-0 bg-gray-900">

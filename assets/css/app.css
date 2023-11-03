@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+body {
+    font-family: 'DM Sans', sans-serif;
+}
+
 .menuIcon {
     width: 26px;
     height: auto;
@@ -155,11 +159,11 @@
 }
 
 .cart-button:hover>span {
-    @apply transition ease-in-out duration-200 bg-pink-600;
+    @apply transition ease-in-out duration-200 bg-violet-600;
 }
 
 .menuBtn:hover>.menuIcon>.bar {
-    @apply transition ease-in-out duration-200 bg-pink-600;
+    @apply transition ease-in-out duration-200 bg-violet-600;
 }
 
 .os-host,

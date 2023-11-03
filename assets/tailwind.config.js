@@ -22,7 +22,7 @@ module.exports = {
     },
     theme: {
       fontFamily: {
-        sans: ["Lato", "Arial", "sans-serif"],
+        sans: ["DM Sans", "Lato", "Arial", "sans-serif"],
       },
       extend: {
         colors: {

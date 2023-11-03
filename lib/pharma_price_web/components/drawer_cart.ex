@@ -7,7 +7,7 @@ defmodule PharmaPriceWeb.DrawerCart do
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center flex-shrink-0 relative px-[30px] py-[20px] mb-[30px] border-b border-gray-200">
           <button
-            class="w-auto h-10 flex items-center justify-center text-gray-400 absolute top-half -mt-[4px] left-[30px] transition duration-300 focus:outline-none hover:text-pink-600 hover:scale-125"
+            class="w-auto h-10 flex items-center justify-center text-gray-400 absolute top-half -mt-[4px] left-[30px] transition duration-300 focus:outline-none hover:text-violet-600 hover:scale-125"
             aria-label="close"
             phx-click={hide_cart_drawer(".drawer-cart")}
           >

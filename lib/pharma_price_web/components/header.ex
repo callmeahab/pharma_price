@@ -18,7 +18,7 @@ defmodule PharmaPriceWeb.Header do
 
       <a
         href="/"
-        class="hidden lg:flex w-96 text-transparent tracking-tighter font-bold text-xl text-lg:2xl bg-clip-text bg-gradient-to-r from-pink-600 to-blue-400"
+        class="hidden lg:flex w-96 text-transparent tracking-tighter font-bold text-xl text-lg:2xl text-violet-800"
       >
         PHARMA PRICE
       </a>
@@ -56,7 +56,7 @@ defmodule PharmaPriceWeb.Header do
           <li>
             <.link
               href={~p"/users/settings"}
-              class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-105"
+              class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-violet-600 transition ease-in-out duration-200 hover:scale-105"
             >
               <%= @current_user.email %>
             </.link>
@@ -65,7 +65,7 @@ defmodule PharmaPriceWeb.Header do
           <li>
             <.link
               href={~p"/users/register"}
-              class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-105"
+              class="flex text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-violet-600 transition ease-in-out duration-200 hover:scale-105"
             >
               Register
             </.link>
@@ -73,7 +73,7 @@ defmodule PharmaPriceWeb.Header do
           <li>
             <.link
               href={~p"/users/log_in"}
-              class="flex w-10 text-[0.8125rem] text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 hover:scale-105"
+              class="flex w-10 text-[0.8125rem] text-zinc-900 font-semibold hover:text-violet-600 transition ease-in-out duration-200 hover:scale-105"
             >
               Log in
             </.link>
@@ -82,7 +82,7 @@ defmodule PharmaPriceWeb.Header do
       </ul>
 
       <button
-        class="cart-button flex justify-center flex-shrink-0 h-auto relative focus:outline-none hover:text-pink-600 hover:scale-105 transition ease-in-out duration-200"
+        class="cart-button flex justify-center flex-shrink-0 h-auto relative focus:outline-none hover:text-violet-600 hover:scale-105 transition ease-in-out duration-200"
         aria-label="cart-button"
         phx-click={show_cart_drawer(".drawer-cart")}
       >

@@ -8,7 +8,7 @@ defmodule PharmaPriceWeb.UserLoginLive do
         Sign in to account
         <:subtitle>
           Don't have an account?
-          <.link navigate={~p"/users/register"} class="font-semibold text-pink-600 hover:underline">
+          <.link navigate={~p"/users/register"} class="font-semibold text-violet-600 hover:underline">
             Sign up
           </.link>
           for an account now.
@@ -21,7 +21,7 @@ defmodule PharmaPriceWeb.UserLoginLive do
 
         <:actions>
           <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-          <.link href={~p"/users/reset_password"} class="text-sm font-semibold hover:pink-600">
+          <.link href={~p"/users/reset_password"} class="text-sm font-semibold hover:violet-600">
             Forgot your password?
           </.link>
         </:actions>

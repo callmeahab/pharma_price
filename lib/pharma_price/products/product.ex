@@ -3,6 +3,10 @@ defmodule PharmaPrice.Products.Product do
   import Ecto.Changeset
 
   @derive {Jason.Encoder, except: [:__meta__, :__struct__]}
+  @derive {
+    Flop.Schema,
+    filterable: [:name, :price], sortable: [:name, :price]
+  }
 
   schema "products" do
     field :name, :string

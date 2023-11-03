@@ -7,7 +7,7 @@ defmodule PharmaPriceWeb.Footer do
       <p class="text-gray-900 text-sm">
         Copyright © <!-- -->2023<!-- -->
         <a
-          class="font-semibold transition-colors duration-200 ease-in-out hover:text-pink-600"
+          class="font-semibold transition-colors duration-200 ease-in-out hover:text-violet-600"
           href="/"
         >
           Milos Markovic

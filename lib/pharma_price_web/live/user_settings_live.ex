@@ -53,7 +53,7 @@ defmodule PharmaPriceWeb.UserSettingsLive do
           <.link
             href={~p"/users/log_out"}
             method="delete"
-            class="flex text-[0.8125rem] text-zinc-900 font-semibold hover:text-pink-600 transition ease-in-out duration-200 pt-16 m-auto"
+            class="flex text-[0.8125rem] text-zinc-900 font-semibold hover:text-violet-600 transition ease-in-out duration-200 pt-16 m-auto"
           >
             Log out
           </.link>

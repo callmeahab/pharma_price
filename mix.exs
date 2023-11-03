@@ -57,7 +57,8 @@ defmodule PharmaPrice.MixProject do
       {:uuid, "~> 1.1"},
       {:ex_cldr_numbers, "~> 2.3"},
       {:meilisearch, "~> 0.2"},
-      {:paginator, "~> 1.2"}
+      {:flop, "~> 0.23"},
+      {:flop_phoenix, "~> 0.22.2"}
     ]
   end
 

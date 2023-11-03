@@ -6,9 +6,15 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    products =
+      case Products.paginated_products(1) do
+        {:ok, {products, _meta}} -> products
+        _ -> []
+      end
+
     {:ok,
      socket
-     |> assign(:items, Products.list_products())
+     |> assign(:items, products)
      |> assign(:vendors, Vendors.list_vendors())
      |> assign(:product, nil)
      |> assign(:cart, %{})

@@ -7,14 +7,14 @@ defmodule PharmaPriceWeb.MainMenu do
       <div class="flex flex-col w-full h-full">
         <div class="w-full h-[90px] bg-gray-100 flex justify-start items-center relative px-[30px] flex-shrink-0">
           <a
-            class="flex w-80 text-transparent tracking-tighter font-bold text-xl bg-clip-text bg-gradient-to-r from-pink-600 to-blue-400"
+            class="flex w-80 text-transparent tracking-tighter font-bold text-xl text-violet-800"
             href="/"
           >
             PHARMA PRICE
           </a>
 
           <button
-            class="w-[30px] h-[30px] flex items-center justify-center text-gray-700 absolute right-[25px] focus:outline-none hover:text-pink-600 hover:scale-110 transition ease-in-out duration-200"
+            class="w-[30px] h-[30px] flex items-center justify-center text-gray-700 absolute right-[25px] focus:outline-none hover:text-violet-600 hover:scale-110 transition ease-in-out duration-200"
             aria-label="close"
             phx-click={hide_drawer(".drawer-menu")}
           >

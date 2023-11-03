@@ -21,6 +21,10 @@ defmodule PharmaPrice.Products do
     Repo.all(Product |> limit(20))
   end
 
+  def paginated_products(page) do
+    Flop.validate_and_run(Product, %{limit: 20, offset: (page - 1) * 20}, for: Product)
+  end
+
   @doc """
   Gets a single product.
 

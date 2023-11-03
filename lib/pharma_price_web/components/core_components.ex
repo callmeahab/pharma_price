@@ -225,7 +225,7 @@ defmodule PharmaPriceWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-pink-600 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg bg-violet-600 hover:bg-zinc-700 py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80 transition ease-in-out duration-200",
         @class
       ]}
@@ -369,7 +369,7 @@ defmodule PharmaPriceWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-2 focus:ring-pink-600 sm:text-sm sm:leading-6",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 transition ease-in-out duration-200",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
@@ -660,17 +660,17 @@ defmodule PharmaPriceWeb.CoreComponents do
   end
 
   @doc """
-  Translates an error message using gettext.
+  translates an error message using gettext.
   """
   def translate_error({msg, opts}) do
     # When using gettext, we typically pass the strings we want
-    # to translate as a static argument:
+    # to translateas a static argument:
     #
-    #     # Translate the number of files with plural rules
+    #     # translatethe number of files with plural rules
     #     dngettext("errors", "1 file", "%{count} files", count)
     #
     # However the error messages in our forms and APIs are generated
-    # dynamically, so we need to translate them by calling Gettext
+    # dynamically, so we need to translatethem by calling Gettext
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
@@ -681,7 +681,7 @@ defmodule PharmaPriceWeb.CoreComponents do
   end
 
   @doc """
-  Translates the errors for a field from a keyword list of errors.
+  translates the errors for a field from a keyword list of errors.
   """
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
