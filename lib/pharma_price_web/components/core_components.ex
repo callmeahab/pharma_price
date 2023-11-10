@@ -732,13 +732,12 @@ defmodule PharmaPriceWeb.CoreComponents do
     |> JS.hide(to: ".overlay-right")
   end
 
-  def toggle_drawer(selector, display) do
+  def toggle_menu(selector, display) do
     %JS{}
     |> JS.toggle(
       to: selector,
       in: {"ease-in-out duration-200", "opacity-0 -translate-y-1/4", "opacity-100 translate-y-0"},
-      out:
-        {"ease-in-out duration-200", "opacity-100 translate-y-0", "opacity-0 -translate-y-1/4"},
+      out: {"ease-in-out duration-200", "opacity-100", "opacity-0"},
       display: display,
       time: 200
     )

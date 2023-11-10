@@ -15,7 +15,7 @@ defmodule PharmaPriceWeb.ItemCard do
     ~H"""
     <div
       class="flex mx-auto flex-col w-full border-4 rounded-2xl bg-white p-6 border-slate-200 hover:drop-shadow-lg
-      text-slate-700 transition ease-in-out duration-200"
+      text-slate-700 transition ease-in-out duration-200 cursor-pointer"
       phx-click={JS.patch(~p"/item-details/#{@item.id}")}
     >
       <div class="flex mb-4 text-[#61AC27]">
@@ -44,7 +44,7 @@ defmodule PharmaPriceWeb.ItemCard do
       </div>
 
       <div class="font-bold w-full text-slate-700 mb-2 text-[20px] pb-4">
-        <%= @item.price %> RSD
+        <%= @item.price %>
       </div>
 
       <div class="flex pb-6">

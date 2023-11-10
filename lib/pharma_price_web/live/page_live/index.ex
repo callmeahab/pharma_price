@@ -7,12 +7,6 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
 
   @impl true
   def mount(_params, session, socket) do
-    products =
-      case Products.paginated_products(1) do
-        {:ok, {products, _meta}} -> products
-        _ -> []
-      end
-
     {:ok,
      socket
      |> assign(
@@ -22,7 +16,8 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
          user_token -> Accounts.get_user_by_session_token(user_token)
        end
      )
-     |> assign(:items, products)
+     |> assign(:page, 1)
+     |> assign(:items, [])
      |> assign(:vendors, Vendors.list_vendors())
      |> assign(:product, nil)
      |> assign(:cart, %{})
@@ -94,8 +89,20 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
     |> assign(:product, Products.get_product!(id))
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :index, params) do
+    page = Map.get(params, "page")
+
+    products =
+      case Products.paginated_products(if page, do: page, else: 1) do
+        {:ok, {products, _meta}} -> products
+        _ -> []
+      end
+
     socket
     |> assign(:product, nil)
+    |> assign(
+      :items,
+      products
+    )
   end
 end

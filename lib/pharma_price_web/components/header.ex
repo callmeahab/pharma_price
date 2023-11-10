@@ -3,7 +3,7 @@ defmodule PharmaPriceWeb.Header do
 
   def render(assigns) do
     ~H"""
-    <div class="flex w-full bg-[#2C4341] h-[50px] px-32 items-center">
+    <div class="flex w-full bg-[#2C4341] h-[50px] xl:px-32 items-center">
       <div class="text-[#61AC27] align-middle my-auto text-sm">Izaberite grad:</div>
       <div class="my-auto text-sm text-white flex mx-2 hover:text-[#61AC27] cursor-pointer transition ease-in-out duration-200">
         <span>Beograd</span>
@@ -50,13 +50,13 @@ defmodule PharmaPriceWeb.Header do
       </div>
     </div>
 
-    <div class="flex flex-row w-full h-[120px] px-32 items-center align-middle gap-4 pb-2">
+    <div class="flex flex-row w-full h-[120px] xl:px-32 items-center align-middle gap-4 pb-2">
       <.link href="/" class="font-bold text-[26px] text-[#61AC27]">Apošteka</.link>
 
       <div>
         <div
-          class="btn bg-white border-slate-200 border-4 py-1.5 px-4 rounded-3xl font-medium flex text-[#61AC27] cursor-pointer hover:text-white hover:bg-[#61AC27] transition ease-in-out duration-200 hover:border-transparent"
-          phx-click={toggle_drawer("#category-menu", "flex")}
+          class="btn bg-white border-slate-200 border-4 py-1.5 px-4 rounded-3xl font-medium flex text-[#61AC27] cursor-pointer transition ease-in-out duration-200 hover:border-transparent"
+          phx-click={toggle_menu("#category-menu", "flex")}
         >
           <Heroicons.Outline.menu_alt_1 class="h-5 my-auto mr-2" />
           <div class="my-auto font-medium">Kategorije</div>
@@ -67,38 +67,38 @@ defmodule PharmaPriceWeb.Header do
         >
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 1</div>
-            <.link>Kategorija 1</.link>
-            <.link>Kategorija 2</.link>
-            <.link>Kategorija 3</.link>
-            <.link>Kategorija 4</.link>
-            <.link>Kategorija 5</.link>
+            <.link class="link">Kategorija 1</.link>
+            <.link class="link">Kategorija 2</.link>
+            <.link class="link">Kategorija 3</.link>
+            <.link class="link">Kategorija 4</.link>
+            <.link class="link">Kategorija 5</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 2</div>
-            <.link>Kategorija 6</.link>
-            <.link>Kategorija 7</.link>
-            <.link>Kategorija 8</.link>
+            <.link class="link">Kategorija 6</.link>
+            <.link class="link">Kategorija 7</.link>
+            <.link class="link">Kategorija 8</.link>
           </div>
 
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 3</div>
-            <.link>Kategorija 1</.link>
-            <.link>Kategorija 2</.link>
+            <.link class="link">Kategorija 1</.link>
+            <.link class="link">Kategorija 2</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 4</div>
-            <.link>Kategorija 3</.link>
-            <.link>Kategorija 4</.link>
-            <.link>Kategorija 5</.link>
-            <.link>Kategorija 6</.link>
-            <.link>Kategorija 7</.link>
-            <.link>Kategorija 8</.link>
+            <.link class="link">Kategorija 3</.link>
+            <.link class="link">Kategorija 4</.link>
+            <.link class="link">Kategorija 5</.link>
+            <.link class="link">Kategorija 6</.link>
+            <.link class="link">Kategorija 7</.link>
+            <.link class="link">Kategorija 8</.link>
           </div>
 
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 5</div>
-            <.link>Kategorija 1</.link>
-            <.link>Kategorija 2</.link>
-            <.link>Kategorija 3</.link>
+            <.link class="link">Kategorija 1</.link>
+            <.link class="link">Kategorija 2</.link>
+            <.link class="link">Kategorija 3</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 6</div>
-            <.link>Kategorija 4</.link>
-            <.link>Kategorija 5</.link>
+            <.link class="link">Kategorija 4</.link>
+            <.link class="link">Kategorija 5</.link>
           </div>
         </div>
       </div>
@@ -120,6 +120,7 @@ defmodule PharmaPriceWeb.Header do
           value={@q}
           phx-change="search"
           id="search-normal"
+          class="flex flex-grow"
         />
       </.form>
 
@@ -128,12 +129,15 @@ defmodule PharmaPriceWeb.Header do
         <span class="text-sm">Sačuvano</span>
       </.link>
 
-      <.link class="link link-primary link-hover flex-col justify-center align-middle text-[#61AC27] hover:text-slate-700 transition ease-in-out duration-200">
+      <.link
+        class="link link-primary link-hover flex-col justify-center align-middle text-[#61AC27] hover:text-slate-700 transition ease-in-out duration-200"
+        phx-click={show_cart_drawer(".drawer-cart")}
+      >
         <Heroicons.Outline.shopping_cart class="h-8 justify-center mx-auto" />
         <span class="text-sm">Korpa</span>
       </.link>
 
-      <.link class="btn btn-primary py-3 px-4 text-white text-ellipsis text-center text-sm w-64 rounded-3xl">
+      <.link class="hidden lg:flex btn btn-primary text-white text-ellipsis text-center text-sm rounded-3xl">
         +381 (063) 12 330 112
       </.link>
     </div>

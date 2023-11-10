@@ -17,9 +17,9 @@
       style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch"
     >
       <%!-- <div class="overlay" role="button" phx-click={hide_drawer(".drawer")}></div> --%>
-      <%!-- <div class="overlay-right" role="button" phx-click={hide_cart_drawer(".drawer-right")}>
-      </div> --%>
-      <div class="overlay-menu" phx-click={toggle_drawer("#category-menu", "flex")}></div>
+      <div class="overlay-right" role="button" phx-click={hide_cart_drawer(".drawer-right")}>
+      </div>
+      <div class="overlay-menu" phx-click={toggle_menu("#category-menu", "flex")}></div>
 
       <div class="flex h-full flex-grow min-w-full">
         <div class="flex flex-col w-screen">
@@ -28,8 +28,8 @@
       </div>
 
       <Footer.render />
-      <%!-- <MainMenu.render current_user={@current_user} />
-      <DrawerCart.render /> --%>
+      <%!-- <MainMenu.render current_user={@current_user} /> --%>
+      <PharmaPriceWeb.DrawerCart.render />
     </main>
   </body>
 </html>
