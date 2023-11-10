@@ -1,11 +1,12 @@
 defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
+  alias PharmaPrice.Accounts
   alias PharmaPrice.Products
   alias PharmaPrice.Vendors
-  alias PharmaPriceWeb.{SearchHeader, ItemCard, ItemDetails, HeroInfo}
+  alias PharmaPriceWeb.{ItemCard, ItemDetails, Header}
   use PharmaPriceWeb, :live_view
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     products =
       case Products.paginated_products(1) do
         {:ok, {products, _meta}} -> products
@@ -14,6 +15,13 @@ defmodule PharmaPriceWeb.PharmaPriceWeb.PageLive.Index do
 
     {:ok,
      socket
+     |> assign(
+       :current_user,
+       case Map.get(session, "user_token") do
+         nil -> nil
+         user_token -> Accounts.get_user_by_session_token(user_token)
+       end
+     )
      |> assign(:items, products)
      |> assign(:vendors, Vendors.list_vendors())
      |> assign(:product, nil)

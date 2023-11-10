@@ -225,7 +225,7 @@ defmodule PharmaPriceWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-violet-600 hover:bg-zinc-700 py-2 px-3",
+        "phx-submit-loading:opacity-75 rounded-lg bg-[#61AC27] hover:bg-zinc-700 py-2 px-3",
         "text-sm font-semibold leading-6 text-white active:text-white/80 transition ease-in-out duration-200",
         @class
       ]}
@@ -369,7 +369,7 @@ defmodule PharmaPriceWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-2 focus:ring-violet-600 sm:text-sm sm:leading-6",
+          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-2 focus:ring-[#61AC27] sm:text-sm sm:leading-6",
           "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400 transition ease-in-out duration-200",
           @errors == [] && "border-zinc-300 focus:border-zinc-400",
           @errors != [] && "border-rose-400 focus:border-rose-400"
@@ -383,25 +383,22 @@ defmodule PharmaPriceWeb.CoreComponents do
 
   def search_input(assigns) do
     ~H"""
-    <span class="absolute top-0 left-0 flex items-center justify-center h-full w-[50px]">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14px" height="14px" viewBox="0 0 14 14">
-        <path
-          d="M14.771,12.752,11.32,9.286a5.519,5.519,0,0,0,1.374-3.634A5.763,5.763,0,0,0,6.839,0,5.763,5.763,0,0,0,.984,5.652,5.763,5.763,0,0,0,6.839,11.3a5.936,5.936,0,0,0,3.354-1.023l3.477,3.492a.783.783,0,0,0,1.08.02A.72.72,0,0,0,14.771,12.752ZM6.839,1.475a4.259,4.259,0,0,1,4.327,4.178A4.259,4.259,0,0,1,6.839,9.83,4.259,4.259,0,0,1,2.511,5.652,4.259,4.259,0,0,1,6.839,1.475Z"
-          transform="translate(-0.984)"
-          fill="#5a5a5a"
-        >
-        </path>
-      </svg>
-    </span>
-    <label for="search-normal" class="sr-only">search-normal</label>
-    <input
-      autocomplete="off"
-      type={@type}
-      name={@name}
-      id={@id}
-      value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-      class="w-full h-12 pl-12 px-4 text-gray-900 placeholder-gray-700 bg-white border-2 border-black rounded outline-none transition duration-200 focus:border-black focus:placeholder-gray-900"
-    />
+    <div class="flex items-center justify-center w-full relative">
+      <span class="absolute top-0 left-0 flex items-center justify-center h-full w-[50px] text-slate-400">
+        <Heroicons.Outline.search class="h-4" />
+      </span>
+      <input
+        autocomplete="off"
+        type={@type}
+        name={@name}
+        id={@id}
+        value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+        placeholder="Pretražite proizvode na našem sajtu"
+        class="w-full pl-10 border-4 m-auto text-sm border-slate-200 py-2 px-4 rounded-3xl flex
+           text-gray-800 placeholder-slate-400 focus:ring-0
+           bg-white transition duration-200 focus:border-[#61AC27] focus:placeholder-gray-500"
+      />
+    </div>
     """
   end
 
@@ -739,9 +736,16 @@ defmodule PharmaPriceWeb.CoreComponents do
     %JS{}
     |> JS.toggle(
       to: selector,
-      in: {"ease-in-out duration-200", "-translate-x-full", "translate-x-0"},
-      out: {"ease-in-out duration-200", "translate-x-0", "-translate-x-full"},
+      in: {"ease-in-out duration-200", "opacity-0 -translate-y-1/4", "opacity-100 translate-y-0"},
+      out:
+        {"ease-in-out duration-200", "opacity-100 translate-y-0", "opacity-0 -translate-y-1/4"},
       display: display,
+      time: 200
+    )
+    |> JS.toggle(
+      to: ".overlay-menu",
+      in: {"ease-in-out duration-200", "opacity-0", "opacity-100"},
+      out: {"ease-in-out duration-200", "opacity-100", "opacity-0"},
       time: 200
     )
   end

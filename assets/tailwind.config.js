@@ -22,14 +22,31 @@ module.exports = {
     },
     theme: {
       fontFamily: {
-        sans: ["DM Sans", "Lato", "Arial", "sans-serif"],
+        sans: ["SF Pro Display", "DM Sans", "sans-serif"],
       },
       extend: {
         colors: {
-          brand: "#FD4F00",
+          brand: "#61AC27",
         },
       },
     },
+  },
+  daisyui: {
+    themes: [
+      {
+        custom: {
+          primary: "#61AC27",
+          secondary: "#f000b8",
+          accent: "#1dcdbc",
+          neutral: "#2b3440",
+          "base-100": "#ffffff",
+          info: "#3abff8",
+          success: "#36d399",
+          warning: "#fbbd23",
+          error: "#f87272",
+        },
+      },
+    ],
   },
   content: ["./js/**/*.js", "../lib/*_web.ex", "../lib/*_web/**/*.*ex"],
   plugins: [
@@ -101,5 +118,6 @@ module.exports = {
         { values }
       );
     }),
+    require("daisyui"),
   ],
 };

@@ -5,29 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title suffix=" · Index page">
-      <%= assigns[:page_title] || "PharmaPrice" %>
+      <%= assigns[:page_title] || "Apošteka" %>
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
-  <body class="antialiased flex flex-col min-h-full">
+  <body class="antialiased flex flex-col min-h-full min-w-full">
     <main
-      class="layout flex flex-col relative min-h-screen flex-grow"
+      class="layout flex flex-col min-h-screen min-w-screen"
       style="min-height: -webkit-fill-available; -webkit-overflow-scrolling: touch"
     >
-      <Header.render current_user={@current_user} />
-      <div class="overlay" role="button" phx-click={hide_drawer(".drawer")}></div>
-      <div class="overlay-right" role="button" phx-click={hide_cart_drawer(".drawer-right")}>
-      </div>
+      <%!-- <div class="overlay" role="button" phx-click={hide_drawer(".drawer")}></div> --%>
+      <%!-- <div class="overlay-right" role="button" phx-click={hide_cart_drawer(".drawer-right")}>
+      </div> --%>
+      <div class="overlay-menu" phx-click={toggle_drawer("#category-menu", "flex")}></div>
 
-      <div class="pt-[90px] flex-auto m-auto h-full">
-        <%= @inner_content %>
+      <div class="flex h-full flex-grow min-w-full">
+        <div class="flex flex-col w-screen">
+          <%= @inner_content %>
+        </div>
       </div>
 
       <Footer.render />
-      <MainMenu.render current_user={@current_user} />
-      <DrawerCart.render />
+      <%!-- <MainMenu.render current_user={@current_user} />
+      <DrawerCart.render /> --%>
     </main>
   </body>
 </html>

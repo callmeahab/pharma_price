@@ -3,7 +3,142 @@ defmodule PharmaPriceWeb.Header do
 
   def render(assigns) do
     ~H"""
-    <header class="flex items-center shadow-lg text-gray-700 body-font fixed bg-white w-full h-[90px] z-20 lg:shadow-header pr-[20px] md:pr-[30px] lg:pr-[40px]">
+    <div class="flex w-full bg-[#2C4341] h-[50px] px-32 items-center">
+      <div class="text-[#61AC27] align-middle my-auto text-sm">Izaberite grad:</div>
+      <div class="my-auto text-sm text-white flex mx-2 hover:text-[#61AC27] cursor-pointer transition ease-in-out duration-200">
+        <span>Beograd</span>
+        <span class="my-auto"><Heroicons.Outline.chevron_down class="pl-1 h-4" /></span>
+      </div>
+      <div class="text-[#61AC27] align-middle my-auto text-sm pl-4">
+        <Heroicons.Outline.globe class="h-5" />
+      </div>
+      <div class="my-auto text-sm text-white flex mx-2 hover:text-[#61AC27] cursor-pointer transition ease-in-out duration-200 flex-grow">
+        <span>RSD</span>
+        <span class="my-auto"><Heroicons.Outline.chevron_down class="pl-1 h-4" /></span>
+      </div>
+      <div class="justify-end text-sm">
+        <ul class="hidden h-full lg:flex items-center gap-4">
+          <%= if @current_user do %>
+            <li>
+              <.link
+                href={~p"/users/settings"}
+                class="flex text-sm my-auto text-white hover:text-[#61AC27] transition ease-in-out duration-200"
+              >
+                <%= @current_user.email %>
+                <Heroicons.Outline.user class="h-5 pl-1 my-auto" />
+              </.link>
+            </li>
+          <% else %>
+            <li>
+              <.link
+                href={~p"/users/register"}
+                class="flex text-sm my-auto text-white hover:text-[#61AC27] transition ease-in-out duration-200"
+              >
+                Registracija <Heroicons.Outline.user class="h-5 pl-1 my-auto" />
+              </.link>
+            </li>
+            <li>
+              <.link
+                href={~p"/users/log_in"}
+                class="flex text-sm my-auto text-white hover:text-[#61AC27] transition ease-in-out duration-200"
+              >
+                Ulogujte se <Heroicons.Outline.user class="h-5 pl-1 my-auto" />
+              </.link>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-row w-full h-[120px] px-32 items-center align-middle gap-4 pb-2">
+      <.link href="/" class="font-bold text-[26px] text-[#61AC27]">Apošteka</.link>
+
+      <div>
+        <div
+          class="btn bg-white border-slate-200 border-4 py-1.5 px-4 rounded-3xl font-medium flex text-[#61AC27] cursor-pointer hover:text-white hover:bg-[#61AC27] transition ease-in-out duration-200 hover:border-transparent"
+          phx-click={toggle_drawer("#category-menu", "flex")}
+        >
+          <Heroicons.Outline.menu_alt_1 class="h-5 my-auto mr-2" />
+          <div class="my-auto font-medium">Kategorije</div>
+        </div>
+        <div
+          id="category-menu"
+          class="absolute hidden z-20 mt-3 px-10 py-6 bg-white drop-shadow-2xl text-slate-700 rounded-[20px] font-medium flex-row space-x-14"
+        >
+          <div class="flex flex-col">
+            <div class="text-[#61AC27] font-semibold">Grupa 1</div>
+            <.link>Kategorija 1</.link>
+            <.link>Kategorija 2</.link>
+            <.link>Kategorija 3</.link>
+            <.link>Kategorija 4</.link>
+            <.link>Kategorija 5</.link>
+            <div class="text-[#61AC27] pt-4 font-semibold">Grupa 2</div>
+            <.link>Kategorija 6</.link>
+            <.link>Kategorija 7</.link>
+            <.link>Kategorija 8</.link>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="text-[#61AC27] font-semibold">Grupa 3</div>
+            <.link>Kategorija 1</.link>
+            <.link>Kategorija 2</.link>
+            <div class="text-[#61AC27] pt-4 font-semibold">Grupa 4</div>
+            <.link>Kategorija 3</.link>
+            <.link>Kategorija 4</.link>
+            <.link>Kategorija 5</.link>
+            <.link>Kategorija 6</.link>
+            <.link>Kategorija 7</.link>
+            <.link>Kategorija 8</.link>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="text-[#61AC27] font-semibold">Grupa 5</div>
+            <.link>Kategorija 1</.link>
+            <.link>Kategorija 2</.link>
+            <.link>Kategorija 3</.link>
+            <div class="text-[#61AC27] pt-4 font-semibold">Grupa 6</div>
+            <.link>Kategorija 4</.link>
+            <.link>Kategorija 5</.link>
+          </div>
+        </div>
+      </div>
+
+      <.form
+        :let={f}
+        phx-change="search"
+        phx-submit="search"
+        for={%{}}
+        as={:search}
+        novalidate=""
+        role="search"
+        class="flex flex-grow"
+      >
+        <.search_input
+          type="search"
+          name="search"
+          field={f[:q]}
+          value={@q}
+          phx-change="search"
+          id="search-normal"
+        />
+      </.form>
+
+      <.link class="link link-primary link-hover flex-col justify-center align-middle text-[#61AC27] hover:text-slate-700 transition ease-in-out duration-200">
+        <Heroicons.Outline.heart class="h-8 justify-center mx-auto" />
+        <span class="text-sm">Sačuvano</span>
+      </.link>
+
+      <.link class="link link-primary link-hover flex-col justify-center align-middle text-[#61AC27] hover:text-slate-700 transition ease-in-out duration-200">
+        <Heroicons.Outline.shopping_cart class="h-8 justify-center mx-auto" />
+        <span class="text-sm">Korpa</span>
+      </.link>
+
+      <.link class="btn btn-primary py-3 px-4 text-white text-ellipsis text-center text-sm w-64 rounded-3xl">
+        +381 (063) 12 330 112
+      </.link>
+    </div>
+
+    <%!-- <header class="flex items-center text-gray-700 body-font bg-white w-full h-[90px] lg:shadow-header pr-[20px] md:pr-[30px] lg:pr-[40px]">
       <button
         aria-label="Menu"
         class="menuBtn flex flex-col items-center justify-center w-[50px] flex-shrink-0 h-full outline-none focus:outline-none lg:w-[90px] hover:scale-105 transition ease-in-out duration-200"
@@ -102,7 +237,7 @@ defmodule PharmaPriceWeb.Header do
           0
         </span>
       </button>
-    </header>
+    </header> --%>
     """
   end
 end

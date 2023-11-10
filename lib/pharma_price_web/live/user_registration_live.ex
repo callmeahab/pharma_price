@@ -11,7 +11,7 @@ defmodule PharmaPriceWeb.UserRegistrationLive do
         Register for an account
         <:subtitle>
           Already registered?
-          <.link navigate={~p"/users/log_in"} class="font-semibold text-violet-600 hover:underline">
+          <.link navigate={~p"/users/log_in"} class="font-semibold text-[#61AC27] hover:underline">
             Sign in
           </.link>
           to your account now.

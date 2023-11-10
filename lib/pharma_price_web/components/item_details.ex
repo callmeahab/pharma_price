@@ -34,7 +34,7 @@ defmodule PharmaPriceWeb.ItemDetails do
       <div class="flex flex-col w-full h-full">
         <div class="w-full flex justify-center relative px-[30px] py-[20px]">
           <button
-            class="w-auto h-10 flex items-center justify-center text-gray-400 absolute top-half -mt-[4px] left-[30px] transition duration-300 focus:outline-none hover:text-violet-600 hover:scale-125"
+            class="w-auto h-10 flex items-center justify-center text-gray-400 absolute top-half -mt-[4px] left-[30px] transition duration-300 focus:outline-none hover:text-[#61AC27] hover:scale-125"
             aria-label="close"
             phx-click={JS.patch(~p"/")}
           >

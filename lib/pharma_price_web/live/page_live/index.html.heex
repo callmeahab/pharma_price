@@ -1,5 +1,37 @@
-<SearchHeader.render q={@q} />
-<HeroInfo.render :if={length(@search_results) == 0} />
+<Header.render current_user={@current_user} q={@q} />
+
+<div
+  :if={length(@search_results) == 0}
+  id="hero-image"
+  class="flex px-30"
+  phx-mount={
+    JS.remove_class(
+      "hidden",
+      to: "#hero-image",
+      transition: "ease-in duration-100 opacity-100",
+      time: 100
+    )
+  }
+  phx-remove={
+    JS.add_class(
+      "hidden",
+      to: "#hero-image",
+      transition: "ease-out duration-100 opacity-0",
+      time: 100
+    )
+  }
+>
+  <div class="absolute z-10 left-[230px] top-60 font-bold text-[80px] leading-none text-white drop-shadow-xl">
+    <p>Popust od -7%</p>
+    <p>Na sve proizvode</p>
+  </div>
+  <img
+    src="/images/pexels-cyril-caiazzo-1634502.jpg"
+    alt=""
+    class="h-[600px] w-full scale-105 object-cover"
+  />
+</div>
+
 <ItemDetails.render
   :if={@live_action == :details}
   product={@product}
@@ -15,8 +47,10 @@
   }
 />
 
-<div class="w-full mt-[35px] xxl:mt-[60px] px-4 lg:px-[35px] pb-10">
-  <div class="grid grid-cols-1 gap-x-3 gap-y-3 mt-9 md:grid-cols-2 md:gap-x-4 md:gap-y-4 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-4 xl:gap-y-4 xxl:grid-cols-4 large:grid-cols-4">
+<div class="w-full px-32 py-16" id="products-list">
+  <div class="text-slate-700 font-bold text-[30px]">Popularni proizvodi</div>
+
+  <div class="cursor-pointer pb-10 grid grid-cols-1 gap-x-3 gap-y-3 mt-9 md:grid-cols-2 md:gap-x-4 md:gap-y-4 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-4 xl:gap-y-4 xxl:grid-cols-5 large:grid-cols-5">
     <%= if length(@search_results) > 0 do %>
       <%= for item <- @search_results do %>
         <ItemCard.main

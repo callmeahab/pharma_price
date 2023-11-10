@@ -3,34 +3,35 @@ defmodule PharmaPriceWeb.UserLoginLive do
 
   def render(assigns) do
     ~H"""
-    <div class="mx-auto max-w-sm pt-12 pb-12 h-full">
-      <.header class="text-center">
-        Sign in to account
-        <:subtitle>
-          Don't have an account?
-          <.link navigate={~p"/users/register"} class="font-semibold text-violet-600 hover:underline">
-            Sign up
-          </.link>
-          for an account now.
-        </:subtitle>
-      </.header>
+    <.header class="text-center pt-10">
+      <span class="text-[30px]">Sign in to account</span>
+      <:subtitle>
+        Nemate nalog?
+        <.link navigate={~p"/users/register"} class="font-semibold text-[#61AC27] hover:underline">
+          Registrujte se
+        </.link>
+        da bi napravili nalog.
+      </:subtitle>
+    </.header>
+    <div class="flex flex-grow justify-center space-y-12 divide-y m-auto pb-10 h-full">
+      <div class="w-96">
+        <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
+          <.input field={@form[:email]} type="email" label="Email" required />
+          <.input field={@form[:password]} type="password" label="Password" required />
 
-      <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
-        <.input field={@form[:email]} type="email" label="Email" required />
-        <.input field={@form[:password]} type="password" label="Password" required />
-
-        <:actions>
-          <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
-          <.link href={~p"/users/reset_password"} class="text-sm font-semibold hover:violet-600">
-            Forgot your password?
-          </.link>
-        </:actions>
-        <:actions>
-          <.button phx-disable-with="Signing in..." class="w-full">
-            Sign in <span aria-hidden="true">→</span>
-          </.button>
-        </:actions>
-      </.simple_form>
+          <:actions>
+            <.input field={@form[:remember_me]} type="checkbox" label="Keep me logged in" />
+            <.link href={~p"/users/reset_password"} class="text-sm font-semibold hover:text-[#61AC27]">
+              Forgot your password?
+            </.link>
+          </:actions>
+          <:actions>
+            <.button phx-disable-with="Signing in..." class="w-full">
+              Sign in <span aria-hidden="true">→</span>
+            </.button>
+          </:actions>
+        </.simple_form>
+      </div>
     </div>
     """
   end
