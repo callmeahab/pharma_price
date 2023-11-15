@@ -55,7 +55,7 @@ defmodule PharmaPriceWeb.Header do
 
       <div>
         <div
-          class="btn bg-white border-slate-200 border-4 py-1.5 px-4 rounded-3xl font-medium flex text-[#61AC27] cursor-pointer transition ease-in-out duration-200 hover:border-transparent"
+          class="btn normal-case bg-white border-slate-200 border-4 py-1.5 px-4 rounded-3xl font-medium flex text-[#61AC27] cursor-pointer transition ease-in-out duration-200 hover:border-transparent"
           phx-click={toggle_menu("#category-menu", "flex")}
         >
           <Heroicons.Outline.menu_alt_1 class="h-5 my-auto mr-2" />
@@ -67,38 +67,38 @@ defmodule PharmaPriceWeb.Header do
         >
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 1</div>
-            <.link class="link">Kategorija 1</.link>
-            <.link class="link">Kategorija 2</.link>
-            <.link class="link">Kategorija 3</.link>
-            <.link class="link">Kategorija 4</.link>
-            <.link class="link">Kategorija 5</.link>
+            <.link class="link link-hover">Kategorija 1</.link>
+            <.link class="link link-hover">Kategorija 2</.link>
+            <.link class="link link-hover">Kategorija 3</.link>
+            <.link class="link link-hover">Kategorija 4</.link>
+            <.link class="link link-hover">Kategorija 5</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 2</div>
-            <.link class="link">Kategorija 6</.link>
-            <.link class="link">Kategorija 7</.link>
-            <.link class="link">Kategorija 8</.link>
+            <.link class="link link-hover">Kategorija 6</.link>
+            <.link class="link link-hover">Kategorija 7</.link>
+            <.link class="link link-hover">Kategorija 8</.link>
           </div>
 
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 3</div>
-            <.link class="link">Kategorija 1</.link>
-            <.link class="link">Kategorija 2</.link>
+            <.link class="link link-hover">Kategorija 1</.link>
+            <.link class="link link-hover">Kategorija 2</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 4</div>
-            <.link class="link">Kategorija 3</.link>
-            <.link class="link">Kategorija 4</.link>
-            <.link class="link">Kategorija 5</.link>
-            <.link class="link">Kategorija 6</.link>
-            <.link class="link">Kategorija 7</.link>
-            <.link class="link">Kategorija 8</.link>
+            <.link class="link link-hover">Kategorija 3</.link>
+            <.link class="link link-hover">Kategorija 4</.link>
+            <.link class="link link-hover">Kategorija 5</.link>
+            <.link class="link link-hover">Kategorija 6</.link>
+            <.link class="link link-hover">Kategorija 7</.link>
+            <.link class="link link-hover">Kategorija 8</.link>
           </div>
 
           <div class="flex flex-col">
             <div class="text-[#61AC27] font-semibold">Grupa 5</div>
-            <.link class="link">Kategorija 1</.link>
-            <.link class="link">Kategorija 2</.link>
-            <.link class="link">Kategorija 3</.link>
+            <.link class="link link-hover">Kategorija 1</.link>
+            <.link class="link link-hover">Kategorija 2</.link>
+            <.link class="link link-hover">Kategorija 3</.link>
             <div class="text-[#61AC27] pt-4 font-semibold">Grupa 6</div>
-            <.link class="link">Kategorija 4</.link>
-            <.link class="link">Kategorija 5</.link>
+            <.link class="link link-hover">Kategorija 4</.link>
+            <.link class="link link-hover">Kategorija 5</.link>
           </div>
         </div>
       </div>

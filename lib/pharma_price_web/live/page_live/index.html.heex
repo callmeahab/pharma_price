@@ -88,10 +88,10 @@
 
   <div class="flex justify-center">
     <div class="join grid grid-cols-2">
-      <button class="join-item btn text-[#61AC27] border-4 border-r-2 border-slate-200 bg-white rounded-3xl">
+      <button class="join-item btn normal-case text-[#61AC27] border-4 border-r-2 border-slate-200 bg-white rounded-3xl">
         Prethodna strana
       </button>
-      <button class="join-item btn text-[#61AC27] border-4 border-l-2 border-slate-200 bg-white rounded-3xl">
+      <button class="join-item btn normal-case text-[#61AC27] border-4 border-l-2 border-slate-200 bg-white rounded-3xl">
         Sledeća strana
       </button>
     </div>
@@ -130,15 +130,16 @@
 <div class="w-full px-4 md:px-14 xl:px-32 pb-16" id="products-list">
   <div class="w-full flex align-middle">
     <span class="flex justify-start text-slate-700 font-bold text-[30px] h-full">
-      Apoteke u Beogradu
+      Apoteke u vašoj blizini:
     </span>
-    <span class="flex align-middle my-auto pl-10 h-full">
+    <span class="flex align-middle my-auto pl-2 pt-1.5 h-full">
       <div class="dropdown dropdown-end">
         <label
           tabindex="0"
-          class="btn btn-sm py-0 bg-transparent border-0 hover:bg-transparent hover:text-slate-700"
+          class="btn btn-sm text-[16px] normal-case py-0 bg-transparent border-0 hover:bg-transparent text-slate-400 hover:text-[#61AC27]"
         >
-          Beograd <Heroicons.Outline.chevron_down class="h-6" />
+          <span class="pr-0 mr-0 font-regular">Beograd</span>
+          <Heroicons.Outline.chevron_down class="h-5" />
         </label>
         <div
           tabindex="0"
@@ -153,5 +154,7 @@
     </span>
   </div>
 
-  <div class=""></div>
+  <div class="flex pt-6">
+    <div class="w-1/2 h-[350px] rounded-[20px]" id="map" phx-hook="MainMap"></div>
+  </div>
 </div>
